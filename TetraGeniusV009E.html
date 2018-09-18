@@ -1,0 +1,4110 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+    <title>TetraGenius: © Copyright 2018 by Stellenbosch University: Department of Industrial Engineering:</title>
+    <!-- © Copyright 2018 Theunis Gysbert Dirkse-van Schalkwyk & Stellenbosch University 
+    <script src="js/effects/VREffect.js"></script>
+    --> 
+    <meta charset="utf-8">
+    <meta name="sassword" content="10100010010001001000100000111010101001110010101101010010">
+    <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+
+ <link rel="stylesheet" href="css/style1.css" type="text/css">
+    <link rel="stylesheet" href="css/TetraGenius.css" type="text/css">
+  </head>
+  <body>
+    <!--<script src="index.js"></script> -->
+	
+<p> <script>	 //Include scripts   </script>
+<div id="header">
+	<a href="index.html">
+      <img src="images/logoTG.png">	</a>
+      <div id="errordiv"></div>
+      
+		  <a href="Join.html">
+      <img src="images/logoTG1.png">	</a>
+      <div id="errordiv"></div>
+      
+<! <img border="0" alt="Buy" src="textures/jaguar.jpg" width="100" height="20"> </a>
+    </div>
+	
+<script src="build/three.js"></script>
+<script src="js/colorpicker.js"></script>
+<script src="js/Detector.js"></script>
+
+<script src="js/fileSave.js"></script>
+<script src="js/threex.domevent.js"></script>
+<script src="js/AudioObject.js"></script>
+<script src="js/loaders/OBJLoader.js"></script>
+<script src="js/renderers/Projector.js"></script>
+<script type='text/javascript' src='js/DAT.GUI.min.js'></script>
+
+<script src="js/controls/TrackballControls.js"></script>
+<script src="js/controls/OrthographicTrackballControls.js"></script>
+
+<script src="js/effects/AnaglyphEffect.js"></script>
+<script src="js/effects/StereoEffect.js"></script>
+<script src="js/effects/OculusRiftEffect.js"></script>
+
+<script src="js/exporters/STLExporter.js"></script>
+<script src="js/exporters/OBJExporter.js"></script>
+<script src="js/exporters/ObjectExporter.js"></script>
+<script src="js/exporters/GeometryExporter.js"></script>
+<script src="js/exporters/BufferGeometryExporter.js"></script>
+<script src="js/exporters/MaterialExporter.js"></script>
+
+<script src="js/objects/mesh.js"></script>
+
+<script src="js/libs/OrbitControls.js"></script>
+<script src="js/libs/KeyboardState.js"></script>
+<script src="js/libs/THREEx.FullScreen.js"></script>
+<script src="js/libs/THREEx.WindowResize.js"></script>
+
+	 
+   
+    <html>
+ 
+<!-- <IMG STYLE="position:absolute; TOP:135px; LEFT:170px; WIDTH:50px; HEIGHT:50px" SRC="Dirk_se_pic/circle.gif"> --> 
+
+<div id="ThreeJS" style="position: absolute; right:0px; bottom:0px"></div>  <!-- Black screen background for threejs -->
+
+var viewSrcButton = document.createElement( 'a' );
+		viewSrcButton.id = 'viewSrcButton';
+		viewSrcButton.target = '_blank';
+		viewSrcButton.textContent = 'View source';
+		viewSrcButton.style.display = 'none';
+		document.body.appendChild( viewSrcButton );
+	
+<!-- Code to display an information button and box when clicked. -->
+<script src="js/jquery-1.9.1.js"></script>
+<script src="js/jquery-ui.js"></script>
+<link rel=stylesheet href="css/jquery-ui.css" /> 
+<link rel=stylesheet href="css/info.css"/> 
+<script src="js/info.js"></script>
+
+<div id="infoButton"></div>
+<div id="infoBox" title="Additional Controls">
+<p>Mouse-over faces to select (White Sphere) and click to add a Tetra design element.</p>
+<p>To create a useful design, you need to think about what you want!</p>
+<p>Right click to remove a Tetra design element!</p>
+<p>Left click open space to rotate. </p>
+	<p>Right click open space to drag. </p>
+	<p>Mouse wheel to zoom.</p>
+	<p>Click on Close Controls to minimise.</p>
+	<p>M - Fullscreen and Esc- Normal screen.</p>
+	<p>Symetric Design mode, designs, 3D option and colours may be changed in the controls top right corner.</p>
+	<p>Move the current rotating Tetra to a suitable position using the ARROW keys.</p>
+	<p>Add a Tetra to apply color change to new Tetras.</p>
+	<p> Rotate the current Tetra using X Y Z keys. This is useful for the globe and bal designs.</p>
+	</div>
+	
+</p>
+<script type=text/javascript src=TG.js>  
+
+</script>
+<script>
+//use sed to customise code based on username/password, amd-three and receive.js view-source:http://felixpalmer.github.io/amd-three.js/
+//note to pass var to server
+//Below is a totally viable method to send javascript variable to any server-side language without the need to use third party libraries like ajax or jquery!
+
+//http://www.sitepoint.com/forums/show...script-Refresh19
+
+//Javascript:
+
+//var name="anonymous"
+//changeScript("/index.php?name="+name);
+
+//Server coded Javascript: (/index.php)
+
+//name=$_GET["name"];
+//$_SESSION["name"]=name;
+
+//header("ContentType: application/x-javascript");
+//header("Cache-Control: no-cache");
+//header("Expires: -1");
+
+//echo "alert(\\"".$_SESSION["name"]."\\");";
+
+
+// MAIN
+
+
+// http://math.hws.edu/graphicsbook/c5/s3.html
+// Check for the various File API support.
+if (window.File && window.FileReader && window.FileList && window.Blob) {
+  // Great success! All the File APIs are supported.
+  console.log("method YESSSSSSSSSSSSS");
+} else {
+  console.log("The File APIs are not fully supported in this browser.");
+}
+
+			var mouseX = 0, mouseY = 0;
+
+			var windowHalfX = window.innerWidth / 2;
+			var windowHalfY = window.innerHeight / 2;
+			//console.log("starting");
+			console.log("starting");
+function toggleDiv(el) {
+  if (document.getElementById(el).style.display == 'none') {
+    document.getElementById(el).style.display = ''
+  } else {
+    document.getElementById(el).style.display = 'none'
+  }
+}
+	
+savedFiles[0] = '. ';
+userLocalName[0] = 'NONE';
+
+
+//userLocalPass[0] = '***.......**';
+
+			init();
+			animate();
+			
+			
+
+			
+			function onDocumentKeyDown(event){ 
+                // Get the key code of the pressed key 
+               keyCode = event.which; 
+               //console.log("keycode" + keyCode);
+		   }
+		   function onDocumentKeyUp(event){ 
+                // Get the key code of the pressed key 
+               keyCodeUp = event.which; 
+               //console.log("keycode" + keyCode);
+		   }
+
+
+function buildAxis( src, dst, colorHex, dashed ) {
+    var geom = new THREE.Geometry(),
+        mat; 
+
+    if(dashed) {
+        mat = new THREE.LineDashedMaterial({ linewidth: 0.05, color: colorHex, dashSize: 0.03, gapSize: 0.04 });
+    } else {
+        mat = new THREE.LineBasicMaterial({ linewidth: 0.05, color: colorHex });
+    }
+
+    geom.vertices.push( src.clone() );
+    geom.vertices.push( dst.clone() );
+    geom.computeLineDistances(); // This one is SUPER important, otherwise dashed lines will appear as simple plain lines
+
+    var axis = new THREE.Line( geom, mat, THREE.LinePieces );
+
+    return axis;
+
+}
+
+
+function buildAxes( length ) {
+    var axes = new THREE.Object3D();
+
+    axes.add( buildAxis( new THREE.Vector3( 0, 0, 0 ), new THREE.Vector3( length, 0, 0 ), 0xFF0000, false ) ); // +X
+    axes.add( buildAxis( new THREE.Vector3( 0, 0, 0 ), new THREE.Vector3( -length, 0, 0 ), 0xFF0000, true) ); // -X
+    axes.add( buildAxis( new THREE.Vector3( 0, 0, 0 ), new THREE.Vector3( 0, length, 0 ), 0x00FF00, false ) ); // +Y
+    axes.add( buildAxis( new THREE.Vector3( 0, 0, 0 ), new THREE.Vector3( 0, -length, 0 ), 0x00FF00, true ) ); // -Y
+    axes.add( buildAxis( new THREE.Vector3( 0, 0, 0 ), new THREE.Vector3( 0, 0, length ), 0x0000FF, false ) ); // +Z
+    axes.add( buildAxis( new THREE.Vector3( 0, 0, 0 ), new THREE.Vector3( 0, 0, -length ), 0x0000FF, true ) ); // -Z
+
+    return axes;
+
+}
+
+		   
+function LoadUserFile(nametoload) {	//-------------------------------------------------------------------------------------------------------
+	
+	
+	scene.remove(octa);
+	console.log(scene.children.length + "children scene Empty");
+	var nametoload = nametoload;
+	
+	var retrievedObjectB = localStorage.getItem(nametoload);
+		retrievedObjectA = JSON.parse(retrievedObjectB);
+		cii = retrievedObjectA[0].NormalT;
+			TColour= retrievedObjectA[0].TColour;
+			rotX= retrievedObjectA[0].rotX;
+			rotY= retrievedObjectA[0].rotY;
+			rotZ== retrievedObjectA[0].rotZ;
+			possiX= retrievedObjectA[0].possiX;
+			 possiY   = retrievedObjectA[0].possiY;
+			 possiZ   = retrievedObjectA[0].possiZ;
+			 TFlagNum   = retrievedObjectA[0].TFlagNum;
+			 TFlagNum[cii+1]=1;
+			 vv0x   = retrievedObjectA[0].vv0x;
+			 vv0y   = retrievedObjectA[0].vv0y;
+			 vv0z   = retrievedObjectA[0].vv0z;
+			 vv1x   = retrievedObjectA[0].vv1x;
+			 vv1y   = retrievedObjectA[0].vv1y;
+			 vv1z   = retrievedObjectA[0].vv1z;
+			 vv2x   = retrievedObjectA[0].vv2x;
+			 vv2y   = retrievedObjectA[0].vv2y;
+			 vv2z   = retrievedObjectA[0].vv2z;
+			 vv3x   = retrievedObjectA[0].vv3x;
+			 vv3y   = retrievedObjectA[0].vv3y;
+			 vv3z   = retrievedObjectA[0].vv3z;
+             mirX   = retrievedObjectA[0].mirX;
+             mirY   = retrievedObjectA[0].mirY;
+             mirXY   = retrievedObjectA[0].mirXY;
+		/*	 ciiX   = retrievedObjectA[0].ciiX;
+			 TColourX   = retrievedObjectA[0].TColourX;
+			 rotXX   = retrievedObjectA[0].rotXX;
+			 rotYX   = retrievedObjectA[0].rotYX;
+			 rotZX   = retrievedObjectA[0].rotZX;
+			 possiXX   = retrievedObjectA[0].possiXX;
+			 possiYX   = retrievedObjectA[0].possiYX;
+			 possiZX   = retrievedObjectA[0].possiZX;
+			 TFlagNumX   = retrievedObjectA[0].TFlagNumX;
+			 ciiY   = retrievedObjectA[0].ciiY;
+			 TColourY   = retrievedObjectA[0].TColourY;
+			 rotXY   = retrievedObjectA[0].rotXY;
+			 rotYY   = retrievedObjectA[0].rotYY;
+			 rotZY   = retrievedObjectA[0].rotZY;
+			 possiXY   = retrievedObjectA[0].possiXY;
+			 possiYY   = retrievedObjectA[0].possiYY;
+			 possiZY   = retrievedObjectA[0].possiZY;
+			 TFlagNumY   = retrievedObjectA[0].TFlagNumY;
+			 ciiXY   = retrievedObjectA[0].ciiXY;
+			 TColourXY   = retrievedObjectA[0].TColourXY;
+			 rotXXY   = retrievedObjectA[0].rotXXY;
+			 rotYXY   = retrievedObjectA[0].rotYXY;
+			 rotZXY   = retrievedObjectA[0].rotZXY;
+			 possiXXY   = retrievedObjectA[0].possiXXY;
+			 possiYXY   = retrievedObjectA[0].possiYXY;
+			 possiZXY   = retrievedObjectA[0].possiZXY;
+			 TFlagNumXY   = retrievedObjectA[0].TFlagNumXY; */
+		 
+		ciiL = retrievedObjectA[0].NormalT;
+		console.log('ciiL: ', ciiL);
+		cii = 0;
+		i=2;
+		iiL= -11111;
+        loadingF = 1;
+      for ( var lim = 1; lim <= ciiL; lim += 1 ) { 
+	cii +=1;
+			addTetraFlag = retrievedObjectA[0].TFlagNum[cii];
+            console.log(cii);
+			
+		    addTetraLC(cii,nametoload);        //allows to build on old tetras-------------------------
+
+			render();
+			
+			
+			
+} 
+ciiB = scene.children.length;
+		cii = 0;
+		i=2;
+		iiL= -11111;
+		console.log(scene.children.length + "children scene Clickables");
+		ciiB = scene.children.length;
+		
+
+		
+for ( var lim = 1; lim <= ciiL; lim += 1 ) { 
+	cii +=1;
+			addTetraFlag = retrievedObjectA[0].TFlagNum[cii];
+			
+			addTetraL(cii);              //adds the tetrablocks visually---------------------------------
+
+			render();
+			
+			
+			
+}
+cii = ciiL;
+//console.log(scene.children.length + "children scene Model");
+//ciiB = scene.children.length;
+
+iiL= 0;
+}	//---------------------------------------------------------------------------------------------------------------------------------------
+
+function LoadUserFileC(CLoad2,objects)  { //colour
+    if (localStorage) {
+console.log("LocalStorage is supported!");
+} else {
+console.log("No support. Use a fallback such as browser cookies or store on the server.");
+}
+var nametoload = CLoad2;
+var retrievedObjectB = localStorage.getItem(nametoload);
+    retrievedObjectA = JSON.parse(retrievedObjectB);
+    
+     
+    ciiL = retrievedObjectA[0].NormalT;
+var vcii=1;
+console.log(objects.length + "obj length");
+console.log(objects[1].position.x + "obj x pos");
+console.log(retrievedObjectA[0].TColour[2] + "outloop obj color");
+console.log(scene.children.length + "children scene 8");
+ciiA = scene.children.length;
+var vName = 0;
+
+scene.traverse( function( node ) {
+
+	if ( node instanceof THREE.Object3D ) {  //Mesh  or Object3D
+ 
+       if(node.userData <990 ){
+		materials[node.userData] = material15;
+    var nextColor = retrievedObjectA[0].TColour[node.userData];
+    materials[node.userData].color.setHex( "0x"+nextColor);
+    lambert = new THREE.MeshLambertMaterial({color: materials[node.userData].color, map: texture2});
+
+objects[node.userData].traverse( function ( child ) {
+        
+		child.material = lambert;	
+}	);
+if(mirX[node.userData] == 1 & Math.abs(possiX[node.userData]) >0.8){
+	objects[node.userData+1000].traverse( function ( child ) {
+        
+		child.material = lambert;	
+}	);
+}
+if(mirY[node.userData] == 1 & Math.abs(possiY[node.userData]) >0.8 ){
+	objects[node.userData+2000].traverse( function ( child ) {
+        
+		child.material = lambert;	
+	});
+}
+if(mirXY[node.userData] == 1 & Math.abs(possiX[node.userData]) >0.8 & Math.abs(possiY[node.userData]) >0.8){
+	objects[node.userData+3000].traverse( function ( child ) {
+        
+		child.material = lambert;	
+}	);
+}
+
+	   }
+
+	   
+	}				
+	} );
+	   
+	
+
+
+    ciiL = retrievedObjectA[0].NormalT-1;
+    
+    cii = ciiL;
+
+iiL= 0;
+
+
+}
+
+// Function to download data to a file
+function download(data, filename, type) {
+    var file = new Blob([data], {type: type});
+    if (window.navigator.msSaveOrOpenBlob) // IE10+
+        window.navigator.msSaveOrOpenBlob(file, filename);
+    else { // Others
+        var a = document.createElement("a"),
+                url = URL.createObjectURL(file);
+        a.href = url;
+        a.download = filename;
+        document.body.appendChild(a);
+        a.click();
+        setTimeout(function() {
+            document.body.removeChild(a);
+            window.URL.revokeObjectURL(url);  
+        }, 0); 
+    }
+}
+	
+
+		   
+		   			function exportToObj(userLocalNameX,fileNameTetX,fileUserX,numUsersX,numUserLX) {           //function exportToObj(blob,fileNameTet) {//old; in () export_text( text ) working save file and USERS both in local storage and text file
+				if (localStorage) {
+ console.log("LocalStorage is supported!");
+} else {
+  console.log("No support. Use a fallback such as browser cookies or store on the server.");
+}
+		localStorage.clear();	// Working with this!!!
+		parameters.Load2 = activeFiles;
+		parameters.LoadC = activeFiles;
+		parameters.DelFile = activeFiles;
+    parameters.uLocalName = userLocalName;//[numUserLX-1];
+    //parameters.uLocalPass = userLocalPass;
+			for (var i = 0; i < Object.keys(gui.__folders).length; i++) {
+				var key = Object.keys(gui.__folders)[i];
+			for (var j = 0; j < gui.__folders[key].__controllers.length; j++ )
+			{
+				gui.__folders[key].__controllers[j].updateDisplay();
+			}
+			}
+		var USERS = [{
+			"current" : current,
+			"userLocalName" : userLocalName,
+			"numUsers" : numUsersX,
+			//"userLocalPass" : "**************QWERTUIOPASDFGHJKLZXCVBNMQAZWSXEDCRFVTGBYHNUJMIKOLP*****************"+userLocalPass,
+			//"Rainbow" : Rainbow,
+			"savedFiles" : savedFiles
+			//"tetraName" : tetraName
+			}];
+		userObject = JSON.stringify(USERS, null, 100);
+		var fileUser = 'USERS';//userLocalName[numUserL];
+		localStorage.setItem(fileUser, userObject);	
+		
+						
+		sentObjectA = [{ 
+			"NormalT" : cii,
+			"TColour" : TColour,
+			"rotX" : rotX,
+			"rotY" : rotY,
+			"rotZ" : rotZ,
+			"possiX" : possiX,
+			"possiY" : possiY,
+			"possiZ" : possiZ,
+			"TFlagNum" : TFlagNum,
+			"vv0x" : vv0x,
+			"vv0y" : vv0y,
+			"vv0z" : vv0z,
+			"vv1x" : vv1x,
+			"vv1y" : vv1y,
+			"vv1z" : vv1z,
+			"vv2x" : vv2x,
+			"vv2y" : vv2y,
+			"vv2z" : vv2z,
+			"vv3x" : vv3x,
+			"vv3y" : vv3y,
+			"vv3z" : vv3z,
+            "mirX" : mirX,
+            "mirY" : mirY,
+            "mirXY" : mirXY,
+		
+		
+  }];
+  
+sampleObject = JSON.stringify(sentObjectA, null, 100);
+ 
+				var blob = new Blob([cii,", cii,","\r\n",TColour,",  TColour,","\r\n",rotX,", rotX,","\r\n",rotY,", rotY ","\r\n",rotZ,", rotZ ","\r\n",possiX,", possiX ","\r\n",possiY,", possiY ","\r\n",possiZ,", possiZ ","\r\n",TFlagNum,", TFlagNum ","\r\n",
+					ciiX,", ciiX, ","\r\n",TColourX,",  TColourX, ","\r\n",rotXX,", rotX_Xsym, ","\r\n",rotYX,", rotYX ","\r\n",rotZX,", rotZX ","\r\n",possiXX,", possiXX ","\r\n",possiYX,", possiYX ","\r\n",possiZX,", possiZX ","\r\n",TFlagNumX,", TFlagNumX ","\r\n",
+					ciiY,", ciiY, ","\r\n",TColourY,",  TColourY, ","\r\n",rotXY,", rotX_Ysym, ","\r\n",rotYY,", rotYY ","\r\n",rotZY,", rotZY ","\r\n",possiXY,", possiXY ","\r\n",possiYY,", possiYY ","\r\n",possiZY,", possiZY ","\r\n",TFlagNumY,", TFlagNumY ",
+				ciiXY,", ciiXandY, ","\r\n",TColourXY,",  TColourXandY, ","\r\n",rotXXY,", rotX_XandYsym, ","\r\n",rotYXY,", rotYXY ","\r\n",rotZXY,", rotZXY ","\r\n",possiXXY,", possiXXY ","\r\n",possiYXY,", possiYXY ","\r\n",possiZXY,", possiZXY ","\r\n",TFlagNumXY,", TFlagNumXY "], {type: "text/plain;charset=utf-8"}); //split +2000 +3000 etc to seperate variabls
+
+
+var filenamex = fileUserX;
+//activeFiles[]
+
+//saveAs(blob, filenamex+".tgdz"); //dont need to save Saved in localStorage
+
+localStorage.setItem(filenamex, sampleObject);
+var rotXD = rotX;
+var rotYD = rotY;
+var rotZD = rotZ;
+ for ( var lim = 1; lim <= cii; lim += 1 ) { 
+rotXD[lim] = rotX[lim]*180/Math.PI-90;
+rotYD[lim] = rotY[lim]*180/Math.PI;
+rotZD[lim] = rotZ[lim]*180/Math.PI;
+}
+var sentObjectB = 
+			"NormalT =" + cii + ";"+
+			"TColour =[" + TColour.toString().substring(8) +"];"+
+			"rotX =[" + rotXD.toString().substring(5) +"];"+
+			"rotY =[" + rotYD.toString().substring(5) +"];"+
+			"rotZ =[" + rotZD.toString().substring(5) +"];"+
+			"possiX =[" + possiX.toString().substring(2) +"];"+
+			"possiY =[" + possiY.toString().substring(2) +"];"+
+			"possiZ =[" + possiZ.toString().substring(2) +"];"+
+			"TFlagNum =[" + TFlagNum.toString().substring(2) +"];"+
+			"vv0x =[" + vv0x.toString().substring(2) +"];"+
+			"vv0y =[" + vv0y.toString().substring(2) +"];"+
+			"vv0z =[" + vv0z.toString().substring(2) +"];"+
+			"vv1x =[" + vv1x.toString().substring(2) +"];"+
+			"vv1y =[" + vv1y.toString().substring(2) +"];"+
+			"vv1z =[" + vv1z.toString().substring(2) +"];"+
+			"vv2x =[" + vv2x.toString().substring(2) +"];"+
+			"vv2y =[" + vv2y.toString().substring(2) +"];"+
+			"vv2z =[" + vv2z.toString().substring(2) +"];"+
+			"vv3x =[" + vv3x.toString().substring(2) +"];"+
+			"vv3y =[" + vv3y.toString().substring(2) +"];"+
+			"vv3z =[" + vv3z.toString().substring(2) +"];"+
+            "mirX =[" + mirX +"];"+
+            "mirY =[" + mirY +"];"+
+            "mirXY =[" + mirXY + "\]\;";
+            sampleObject = JSON.stringify(sentObjectB, null, 100);
+           var find = [ "\""];
+			var replace = [""];
+			var sampleObjectC = sampleObject.toString().replace(find, replace);
+			sampleObjectC = sampleObjectC.slice(0, -1);
+		  //var sampleObjectC = sentObjectB.toString().replace("\"", ""); 
+		  //sampleObject = sampleObjectC.toString().replace("=,", "= [");
+		  //sampleObjectC = sampleObject.toString().replace(",;,", "];");
+		 //var sampleObject = sentObjectC.replace("=,", ""); 
+		 //var sentObjectC = sampleObject.replace(",", ";"); 
+		//sampleObject = JSON.stringify(sentObjectC, null, 100);
+download(sampleObjectC, filenamex, 'text/csv' );
+
+console.log("savedxxxxxx"+ filenamex);
+//console.log("savedxxxxxx"+ myFilePath);
+camera.remove(objects[1]);
+//camera.remove(objects[2]);
+camera.remove( objects[999]);
+scene.remove(objects[1]);
+//scene.remove(objects[2]);
+scene.remove( objects[999]);
+
+var mtlOutput = '';  // getting the color from the tcolour variable
+      var im = 0;
+	for (var i = 2; i < (cii+1); i++) {
+
+		mtlOutput += 'newmtl Material.'+ (i-1+im) + '\n';
+		var hex = '0x' + TColour[i];
+		var r = hex >> 16;
+		var g = hex >> 8 & 0xFF;
+		var b = hex & 0xFF;
+		r = r/255*0.8;
+		g = g/255*0.8;
+		b = b/255*0.8;
+         
+		mtlOutput += 'Ns 96.0000\n';
+		mtlOutput += 'Ni 1.5000\n';
+		mtlOutput += 'd 1.0000\n';
+		mtlOutput += 'Tr 0.0000\n';
+		mtlOutput += 'Tf 1.0000 1.0000 1.0000\n';
+		mtlOutput += 'illum 2\n';
+		mtlOutput += 'Ka 1.0000 1.0000 1.0000\n';
+		mtlOutput += 'Kd ' + r + ' ' + g + ' ' + b + ' ' + '\n';
+		mtlOutput += 'Ks 0.0000 0.0000 0.0000\n';
+		mtlOutput += 'Ke 0.2000 0.2000 0.2000\n';
+		
+		if(typeof objects[i+1000] === 'undefined') {
+    // does not exist
+}
+else {
+    // does exist
+    im += 1;
+    mtlOutput += 'newmtl Material.'+ (i-1+im) + '\n';
+		var hex = '0x' + TColour[i];
+		var r = hex >> 16;
+		var g = hex >> 8 & 0xFF;
+		var b = hex & 0xFF;
+		r = r/255*0.8;
+		g = g/255*0.8;
+		b = b/255*0.8;
+         
+		mtlOutput += 'Ns 96.0000\n';
+		mtlOutput += 'Ni 1.5000\n';
+		mtlOutput += 'd 1.0000\n';
+		mtlOutput += 'Tr 0.0000\n';
+		mtlOutput += 'Tf 1.0000 1.0000 1.0000\n';
+		mtlOutput += 'illum 2\n';
+		mtlOutput += 'Ka 1.0000 1.0000 1.0000\n';
+		mtlOutput += 'Kd ' + r + ' ' + g + ' ' + b + ' ' + '\n';
+		mtlOutput += 'Ks 0.0000 0.0000 0.0000\n';
+		mtlOutput += 'Ke 0.2000 0.2000 0.2000\n';
+}
+if(typeof objects[i+2000] === 'undefined') {
+    // does not exist
+}
+else {
+    // does exist
+    im += 1;
+    mtlOutput += 'newmtl Material.'+ (i-1+im) + '\n';
+		var hex = '0x' + TColour[i];
+		var r = hex >> 16;
+		var g = hex >> 8 & 0xFF;
+		var b = hex & 0xFF;
+		r = r/255*0.8;
+		g = g/255*0.8;
+		b = b/255*0.8;
+         
+		mtlOutput += 'Ns 96.0000\n';
+		mtlOutput += 'Ni 1.5000\n';
+		mtlOutput += 'd 1.0000\n';
+		mtlOutput += 'Tr 0.0000\n';
+		mtlOutput += 'Tf 1.0000 1.0000 1.0000\n';
+		mtlOutput += 'illum 2\n';
+		mtlOutput += 'Ka 1.0000 1.0000 1.0000\n';
+		mtlOutput += 'Kd ' + r + ' ' + g + ' ' + b + ' ' + '\n';
+		mtlOutput += 'Ks 0.0000 0.0000 0.0000\n';
+		mtlOutput += 'Ke 0.2000 0.2000 0.2000\n';
+}
+if(typeof objects[i+3000] === 'undefined') {
+    // does not exist
+}
+else {
+    // does exist
+    im += 1;
+    mtlOutput += 'newmtl Material.'+ (i-1+im) + '\n';
+		var hex = '0x' + TColour[i];
+		var r = hex >> 16;
+		var g = hex >> 8 & 0xFF;
+		var b = hex & 0xFF;
+		r = r/255*0.8;
+		g = g/255*0.8;
+		b = b/255*0.8;
+         
+		mtlOutput += 'Ns 96.0000\n';
+		mtlOutput += 'Ni 1.5000\n';
+		mtlOutput += 'd 1.0000\n';
+		mtlOutput += 'Tr 0.0000\n';
+		mtlOutput += 'Tf 1.0000 1.0000 1.0000\n';
+		mtlOutput += 'illum 2\n';
+		mtlOutput += 'Ka 1.0000 1.0000 1.0000\n';
+		mtlOutput += 'Kd ' + r + ' ' + g + ' ' + b + ' ' + '\n';
+		mtlOutput += 'Ks 0.0000 0.0000 0.0000\n';
+		mtlOutput += 'Ke 0.2000 0.2000 0.2000\n';
+}
+		
+          
+		/* if (mat.map && mat.map instanceof THREE.Texture) {
+          
+			var file = mat.map.image.currentSrc.slice( mat.map.image.currentSrc.slice.lastIndexOf("/"), mat.map.image.currentSrc.length - 1 );
+            
+			mtlOutput += 'map_Ka ' + file + '\n';
+			mtlOutput += 'map_Kd ' + file + '\n';
+            
+		} */
+          
+	}    // getting the color from the tcolour variable
+
+
+var exporter = new THREE.OBJExporter();  // THREE.STLExporter();
+count = 0;
+var str = exporter.parse(scene, count); // Export the scene
+str = 'mtllib ' + filenamex +  '.mtl\n' + str;
+var str1 = str[0]; //.obj;
+var str2 = TColour.toString().substring(8); //.mtl;
+//addTetraF();
+var blob = new Blob( [str], { type : 'text/plain' } ); // Generate Blob from the string
+saveAs( blob, filenamex +'.obj' ); //Save the Blob to file.stl or obj
+var blob = new Blob( [mtlOutput], { type : 'text/plain' } ); // Generate Blob from the string
+saveAs( blob, filenamex +'.mtl' ); //Save the Blob to file.stl or obj
+camera.add(objects[1]);
+//camera.remove(objects[2]);
+camera.add( objects[999]);
+//scene.remove(objects[1]);
+//scene.remove(objects[2]);
+//scene.remove( objects[999]);
+
+
+}
+function loadALL()
+{
+  if (localStorage.getItem("USERS") === null) {
+  	numUsers = 1;
+	numUserL = 0;
+	userLocalName[0]= 'NONE';
+	savedFiles= ['. ','No file'];
+	numSavedFiles=2;
+	current = ['NONE','No file',0]; //User, File, UserNr
+	console.log(numSavedFiles , "  HoWWW1111111111111111111   ",userLocalName[0])
+		   
+	    var USERS = [{
+			"current" : current,
+			"userLocalName" : ["NONE"],
+			"numUsers" : numUsers,
+			//"userLocalPass" : "**************QWERTUIOPASDFGHJKLZXCVBNMQAZWSXEDCRFVTGBYHNUJMIKOLP*****************"+userLocalPass,
+			//"Rainbow" : 'OFF',
+			"savedFiles" : savedFiles,
+			//"tetraName" : tetraName
+			}];
+		userObject = JSON.stringify(USERS, null, 100);
+		var fileUser = 'USERS';//userLocalName[numUserL];
+		localStorage.setItem(fileUser, userObject);	
+		uLocalName = current[0];
+} 
+							console.log(numSavedFiles , "  HoWWWW00000000000000 ",savedFiles[1])
+}
+
+function init()  //.............................................................................................................Start here..................................
+{
+	
+		if (localStorage.getItem("USERS") === null) {
+  
+	loadALL();
+
+} else {
+	//if(localStorage.getItem("USERS").length >0)
+								//{
+								var retrievedObjectU = localStorage.getItem("USERS");
+								var USERS = JSON.parse(retrievedObjectU);
+								//Rainbow = USERS[0].Rainbow;
+								numSavedFiles = USERS[0].savedFiles.length;
+								numUsers = USERS[0].userLocalName.length;
+								userLocalName =  USERS[0].userLocalName;
+								
+								current = USERS[0].current;
+								numUserL = current[2];
+								console.log(numSavedFiles , "  HoWWWW2222222222222222222")
+								//for (var i = 1; i < numSavedFiles; i++) {
+								  //savedFiles[i+1]= USERS[0].savedFiles[i];  //USERS[0].savedFiles;
+							//	}
+							uLocalName=current[0];
+
+							savedFiles=USERS[0].savedFiles;
+							currentFile = current[1];
+							console.log(currentFile , "  ", uLocalName,"   ",numUserL)
+								} //
+								
+								
+
+							
+console.log(numSavedFiles , "  HoWWWW00000000000000 ",savedFiles[1])
+	
+	material11.side = THREE.DoubleSide
+	//designs = ['models/obj/Tetra12.obj', 'models/obj/T3.obj','models/obj/cube3.obj', 'models/obj/Tetra10.obj', 'models/obj/Tetra8.obj']; BumpSurfStampA2.obj ipo flower2 
+	//also change lines: 400,800 Tetra12 is original
+		console.log(designs[0]+":   "+ designs[1]+":  " + designs[2]+":   "+ designs[3]+":  " + designs[4]+":   "+ designs[5]);
+                floatingDiv = document.createElement( 'div' ); ///to save a file
+				floatingDiv.className = 'floating';
+				document.body.appendChild( floatingDiv );
+
+projector = new THREE.Projector();
+	
+	
+
+            
+	// SCENE
+	scene = new THREE.Scene();
+	scene2 = new THREE.Scene();
+	//backgroundScene = new THREE.Scene();   //bgc : may be removed    
+  
+	// CAMERA
+	var SCREEN_WIDTH = window.innerWidth, SCREEN_HEIGHT = window.innerHeight;
+	var VIEW_ANGLE = 45, ASPECT = SCREEN_WIDTH / SCREEN_HEIGHT, NEAR = 0.01, FAR = 20000;
+	//backgroundCamera = new THREE.PerspectiveCamera( VIEW_ANGLE, ASPECT, NEAR, FAR);  //bgc : may be removed   
+	var bgc = "no"; 
+	if(bgc == "yes"){
+		var reflectionCube = new THREE.CubeTextureLoader()
+					.setPath( 'textures/cube/skybox/' )
+					.load( [ 'px.jpg', 'nx.jpg', 'py.jpg', 'ny.jpg', 'pz.jpg', 'nz.jpg' ] )
+					//.setSize(5000,5000,1)
+					
+				reflectionCube.format = THREE.RGBFormat;}
+				//reflectionCube.setSize(5000,5000,1)}
+	if(bgc == "no"){			
+	var reflectionCube = new THREE.CubeTextureLoader()
+					.setPath( 'textures/cube/Engineering/' )
+					.load( [ '1.jpg', '1.jpg', '1.jpg', '1.jpg', '1.jpg', '1.jpg' ] );
+					//.setPath( 'textures/' )
+					//.load( [ 'sky.jpg', 'sky.jpg', 'sky.jpg', 'sky.jpg', 'sky.jpg', 'dark-s_nz.jpg' ] );
+				reflectionCube.format = THREE.RGBFormat;}
+				
+	camera = new THREE.PerspectiveCamera( VIEW_ANGLE, ASPECT, NEAR, FAR);
+	// instantiate a listener 
+	var audioListener = new THREE.AudioListener();
+
+// add the listener to the camera
+camera.add( audioListener );
+
+// instantiate audio object
+var MusicTG = new THREE.Audio( audioListener );
+
+
+// add the audio object to the scene
+scene.add( MusicTG );
+
+// instantiate a loader
+var loader = new THREE.AudioLoader();
+
+// load a resource
+loader.load(
+    // resource URL
+    'sounds/1.mp3',
+    // Function when resource is loaded
+    function ( audioBuffer ) {
+        // set the audio object buffer to the loaded object
+        MusicTG.setBuffer( audioBuffer );
+        MusicTG.setLoop(true);
+
+        // play the audio
+        MusicTG.play();
+        //MusicTG.stop();
+    },
+    // Function called when download progresses
+    function ( xhr ) {
+        console.log( (xhr.loaded / xhr.total * 100) + '% loaded' );
+    },
+    // Function called when download errors
+    function ( xhr ) {
+        console.log( 'An error happened' );
+    });
+
+	// Put in two cameras
+cameraLeft = new THREE.PerspectiveCamera( VIEW_ANGLE, ASPECT, NEAR, FAR);
+cameraLeft.position.set( 0, 0, 3 );
+cameraLeft.position.set(0.1,-2.50,-30.195);
+	cameraLeft.lookAt(scene.position);
+scene.add(cameraLeft);
+
+cameraRight = new THREE.PerspectiveCamera( VIEW_ANGLE, ASPECT, NEAR, FAR);
+cameraRight.position.set( 0, 0, 3 );
+cameraRight.position.set(-0.1,-2.50,-30.195);
+	cameraRight.lookAt(scene.position);
+scene.add(cameraRight);
+	
+	scene.add(camera);
+	//reflectionCube.size.x = 30;
+	//reflectionCube.setSize.y = 30;
+	//reflectionCube.setSize.z = 30;
+	scene.background = reflectionCube;
+	//scene.background.scale = 0.01;					//bgc : may be removed 
+	//backgroundScene.background = backgroundMesh;		//bgc : may be removed 
+	//scene.background = backgroundMesh;					//bgc : may be removed to get a background
+	//backgroundCamera.position.set(0,-2.50,-30.195);		//bgc : may be removed 
+	//backgroundScene.position.set(0, 0, -30);			//bgc : may be removed 
+	//backgroundCamera.lookAt(backgroundScene.position);	//bgc : may be removed 
+	camera.position.set(0,-2.50,-30.195);
+	camera.lookAt(scene.position);	
+	
+	
+	// RENDERER
+	if ( ! Detector.webgl ) Detector.addGetWebGLMessage();
+	if ( Detector.webgl )
+		renderer = new THREE.WebGLRenderer( {antialias:true} );
+		
+	else
+		renderer = new THREE.CanvasRenderer(); 
+		renderer.setClearColor( 0x000000 );
+	renderer.setSize(SCREEN_WIDTH, SCREEN_HEIGHT);
+	container = document.getElementById( 'ThreeJS' );
+	
+	
+	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	renderer.gammaInput = true;
+	renderer.gammaOutput = true;
+	container.appendChild( renderer.domElement );
+	document.addEventListener( 'mousedown', onDocumentMouseDown, false );
+	document.addEventListener( 'mousemove', onDocumentMouseMove, false );
+	document.addEventListener("keydown", onDocumentKeyDown, false); 
+	document.addEventListener("keyup", onDocumentKeyUp, false); //("keyup", this._onKeyUp, false);
+	document.addEventListener("keyup", function(object) {  // Audio
+    audio.play();
+  });
+	// EVENTS
+	
+	THREEx.WindowResize(renderer, camera);
+	THREEx.FullScreen.bindKey({ charCode : 'm'.charCodeAt(0) });
+	// CONTROLS
+	//controls = new THREE.OrbitControls( camera, renderer.domElement );
+	//controls= new THREE.OrthographicTrackballControls( camera, renderer.domElement );
+	//OrthographicTrackballControls
+	controls = new THREE.TrackballControls( camera, renderer.domElement );
+	//controls = new THREE.TrackballControls( camera );
+	renderer.domElement.addEventListener( 'mousedown', onDocumentMouseDown, false );
+	renderer.domElement.addEventListener( 'mousemove', onDocumentMouseMove, false );
+	document.addEventListener("keydown", onDocumentKeyDown, false); 
+	document.addEventListener("keyup", onDocumentKeyUp, false); //("keyup", this._onKeyUp, false);
+	
+	anaglyphRenderer = new THREE.AnaglyphEffect( renderer, SCREEN_WIDTH, SCREEN_HEIGHT );
+	stereoRenderer = new THREE.StereoEffect( renderer, SCREEN_WIDTH, SCREEN_HEIGHT );
+	//VRRenderer = new THREE.VREffect( renderer, SCREEN_WIDTH, SCREEN_HEIGHT );
+	//OcRenderer = new THREE.VREffect( renderer, SCREEN_WIDTH, SCREEN_HEIGHT );
+	// Lights
+
+				var ambientLight = new THREE.AmbientLight( 0xbbbbbb );
+				
+			lightsP[ 0 ] = new THREE.AmbientLight( 0xffffff );
+			lightsP[ 0 ].intensity = 2;
+			lightsP[ 1 ] = new THREE.PointLight( 0xffffff, 1, 0 );
+			lightsP[ 2 ] = new THREE.PointLight( 0xffffff, 1, 0 );
+			lightsP[ 1 ].intensity = 3;
+			lightsP[ 2 ].intensity = 3;
+
+			lightsP[ 0 ].position.set( 0, 20, 0 );
+			lightsP[ 1 ].position.set( 100, 200, 100 );
+			lightsP[ 2 ].position.set( - 100, - 200, - 100 );
+
+			scene.add( lightsP[ 0 ] );
+			scene.add( lightsP[ 1 ] );
+			scene.add( lightsP[ 2 ] );
+			
+			
+
+
+
+				var directionalLight = new THREE.DirectionalLight( 0xffaaff, 1 );
+				directionalLight.position.set( 1, 50, 1 ).normalize();
+				//scene.add( directionalLight );
+				
+				var pointLight = new THREE.PointLight( 0xffffff, 2, 800 );
+				var axes = buildAxes( 1000 ); //buildAxes
+				scene.add(axes);
+
+	
+	////////////
+	// CUSTOM //
+	////////////
+  var newSphereGeom= new THREE.SphereGeometry(0.50,0.50,0.50);
+    var color1 = new THREE.Color( 'skyblue' );
+    var mesh2 = new THREE.Mesh( newSphereGeom, color1 );
+
+      		mesh2.position.x = 0;
+					mesh2.position.y = 200;
+					mesh2.position.z = 500;
+	
+	//scene.add(mesh2);
+	console.log("flag1");
+	ci = 1;
+	cii = 1;
+	materials[cii] = material15;
+
+
+
+ 
+  
+ // updateCube();
+  	gui = new dat.GUI();
+	
+	parameters = 
+	{
+		
+		x: 0, y: 30, z: 0,
+		color: "#eeeeee", // color (change "#" to "0x")
+		opacity: 3,  //light intensity
+		REMOVE_DESIGN: "",
+		Xsym: "OFF",  //initial value with i
+		Ysym: "OFF",
+		Zsym: 3,
+		Doption: "OFF",
+		Rainbow: "Random",
+		//TransparentBlock: "False",
+		addTetraName: "Original",
+		addTetraName2R: "",
+		addTetraName2: "",
+		addTetraName3: "",
+		addTetraName4: "",
+		addTextureName: "",
+		Load2: ". ",
+		LoadC: ". ",
+		DelFile: ". ",
+		uLocalName: uLocalName,
+		uLocalSelect: " ",
+		saveOBJ2: " ",
+		visible: "1",
+		//material: "Phong",
+		//reset: function() { resetCube() }
+	};
+	text = 
+	{
+		Save_filename: "MyDesign",
+		C_filename: "",
+		Load_filename:  "",
+		D_filename: "",
+		USER_Name:uLocalName,
+		USER_Select:"NONE"
+	//	UserPassword:""
+	};
+	/*var retrievedObjectU = localStorage.getItem("USERS");
+								var USERS = JSON.parse(retrievedObjectU);
+								//Rainbow = USERS[0].Rainbow;
+								numSavedFiles = USERS[0].savedFiles.length;
+								numUsers = USERS[0].userLocalName.length;
+								numUserL = 0;
+								console.log(numSavedFiles , "  HoWWWW2222222222222222222")
+								//for (var i = 1; i < numSavedFiles; i++) {
+								  //savedFiles[i+1]= USERS[0].savedFiles[i];  //USERS[0].savedFiles;
+							//	}
+							userLocalName=USERS[0].userLocalName;
+
+							savedFiles=USERS[0].savedFiles;*/
+Xsym = "OFF";
+Ysym = "OFF";
+Zsym = 3;
+
+cubeColor = gui.addColor( parameters, 'color' ).name('Color').listen();
+		var lth = uLocalName.length;	
+folder1 = gui.addFolder('  USER SETTINGS  ');
+
+	var rload = folder1.add( parameters, 'REMOVE_DESIGN', [ "Restart!", "Design", "Game Levels", "Sfere's only" ] ).name('MODE').listen();  
+		var cubeX = folder1.add( parameters, 'Xsym', [ "OFF", "ON" ] ).name('Xsymmetry').listen();  
+		var cubeY = folder1.add( parameters, 'Ysym', [ "OFF", "ON" ] ).name('Ysymmetry').listen();  
+		var cubeZ = folder1.add( parameters, 'Zsym', [ 0.1,0.5,0.8,1,1.5,2,2.5,3 ] ).name('Light Intensity').listen();  
+		var cubeD = folder1.add( parameters, 'Doption', [ "OFF", "Anaglyph", "Side-by-Side" ] ).name('3 D view').listen();  
+		var varyColor = folder1.add( parameters, 'Rainbow', [ "OFF", "Random", "Greens", "Reds","Blues","Greys","Yellow/Blue" ] ).name('Random Colors').listen(); 
+		//var TBlock = folder1.add( parameters, 'TransparentBlock', [ "True", "False" ] ).name('Transparent').listen(); 
+		//designs = ['models/obj/pipe2.obj', 'models/obj/Tetra4.obj','models/obj/cube3.obj', 'models/obj/Tetra10.obj', 'models/obj/Tetra8.obj','models/obj/circle5.obj'];
+		var Design = folder1.add( parameters, 'addTetraName', tNames).name('Solid Designs').listen();   //[ " ","Original", "Geometric","Spiral","Pipes", "Clipped", "Cubes", "TetraFrame","TetraMag","Flower","Triangles","TetraClip","Esher Stair","Old Style","FlatPack","Cubic","Modern","DNA segment","Interlock","Dragon","Torus"] ).name('Designs 1').listen();  
+		var Design2R = folder1.add( parameters, 'addTetraName2R', tNames2 ).name('Frame Designs').listen();  
+		var Design2 = folder1.add( parameters, 'addTetraName2', tNames3 ).name('Shapes and pipes').listen();  
+		var Design3 = folder1.add( parameters, 'addTetraName3', tNames4 ).name('Art Designs').listen();  
+		var Design4 = folder1.add( parameters, 'addTetraName4', tNames5 ).name('Spheres').listen();  
+		var Design5 = folder1.add( parameters, 'addTextureName', texNames).name('Textures').listen(); 
+		var MLoad2 = folder1.add( parameters, 'visible', ["Silence","1","2","3","4","5","6","7","8","9","10"]).name('Listen to music').listen();  
+		//var saveOO = folder1.add( parameters, 'saveOBJ1', [" ", " Save... "] ).name('Save').listen();  
+		
+		
+		var yFile = 0;
+		console.log(numSavedFiles , "  Ho1",lth,"       userL ", savedFiles[1].slice(0,lth))
+		for (var i = 1; i < numSavedFiles; i++) {//---------------------POPULATE FILES from LOCALUSER-----------------
+			//var fnnn=savedFiles[i].length;
+			if(savedFiles[i].slice(0,lth) == uLocalName){
+				var ltx = savedFiles[i].length;
+				yFile++
+				activeFiles[yFile-1] = savedFiles[i].slice(lth-ltx);
+				console.log(savedFiles[i] , "  YEA",i,"       userL ", savedFiles[1].slice(0,4))
+				//yFile++
+			}
+			if(savedFiles[1] == "No file"){
+				activeFiles = [". ", "No file"];
+			}
+		}
+		userLocalName[numUserL]=uLocalName;
+		//uLocalName="NONE";
+		console.log(yFile , "  Ho2",lth,"    activeFiles ", activeFiles[0],"   uln ",uLocalName)					
+		console.log(yFile , "  Ho2",lth,"    activeFiles ", activeFiles[1],"   uln ",uLocalName)
+	//folder1.open();
+	var f2 = gui.addFolder('Save Design');
+		f2.add(text, 'Save_filename');
+		var saveO2 = f2.add( parameters, 'saveOBJ2', [" ", " Save... "] ).name('Save').listen(); 
+		//f2.open();
+		
+		console.log(numSavedFiles , "  Ho3",lth,"       userL ", savedFiles[1])
+		var f3 = gui.addFolder('Load Design');
+		f3.add(text, 'Load_filename');
+		var DesignLoad2 = f3.add( parameters, 'Load2', activeFiles ).name('Load Designs').listen(); 
+		//f3.open();
+		
+		var f4 = gui.addFolder('Load Colours');
+		f4.add(text, 'C_filename');
+		var CLoad2 = f4.add( parameters, 'LoadC', activeFiles ).name('Load Colours').listen(); 
+		
+		var f5 = gui.addFolder('Delete Saved Design');
+		f5.add(text, 'D_filename');
+		var delF = f5.add( parameters, 'DelFile', activeFiles ).name('Delete Saved Design').listen(); 
+		
+		var f6 = gui.addFolder('Create or select a USER');
+		f6.add(text, 'USER_Name');
+		var uLN = f6.add( parameters, 'uLocalName', [" ", "Create_User"] ).name('Create USER').listen();
+		var uLChoose = f6.add( parameters, 'uLocalSelect', userLocalName ).name('Select USER').listen();
+		//parameters.uLocalName = userLocalName;
+			for (var i = 0; i < Object.keys(gui.__folders).length; i++) {
+				var key = Object.keys(gui.__folders)[i];
+			for (var j = 0; j < gui.__folders[key].__controllers.length; j++ )
+			{
+				gui.__folders[key].__controllers[j].updateDisplay();
+			}
+			}
+		//nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn
+		//localStorage.removeItem(". ");
+		uLN.onChange(function(value) //User Function Create and Select--------------------------CREATE USER------------------------CREATE USER
+	{   
+	  //gui.close();
+	  if(value == "Create_User")
+	  {
+	    console.log('CRaaaeteeeee!    aasasassasasaaaafffffff');
+	    numUsers +=1;
+	    numUserL = numUsers-1;  //for 4 users, the numbers are 0-3 !!
+		userLocalName[numUserL]= text.USER_Name;
+		current[0] = userLocalName[numUserL];
+		current[2] = numUserL;
+		var fileNameTet = text.Save_filename;
+		var savename = userLocalName[numUserL]+fileNameTet;
+		current[1] = savename;
+		//text.USER_Name=userLocalName[numUserL];
+	    
+	    var USERS = [{
+			"current" : current,
+			"userLocalName" : userLocalName,
+			"numUsers" : numUsers,
+			//"userLocalPass" : "**************QWERTUIOPASDFGHJKLZXCVBNMQAZWSXEDCRFVTGBYHNUJMIKOLP*****************"+userLocalPass,
+			//"Rainbow" : Rainbow,
+			"savedFiles" : savedFiles
+			//"tetraName" : tetraName
+			}];
+		userObject = JSON.stringify(USERS, null, 100);
+		var fileUser = 'USERS';//userLocalName[numUserL];
+		localStorage.setItem(fileUser, userObject);	
+	  }
+		//userLocalName
+		//f6.uLChoose.updateDisplay();
+		var retrievedObjectU = localStorage.getItem("USERS");
+								var USERS = JSON.parse(retrievedObjectU);
+								//Rainbow = USERS[0].Rainbow;
+								numSavedFiles = USERS[0].savedFiles.length;
+								numUsers = USERS[0].userLocalName.length;
+								current = USERS[0].current;
+								numUserL = current[2];
+								currentFile = current[1];
+								uLocalName = current[0];
+								console.log(numSavedFiles , "  HoWWWWWWW444444444444444444")
+								//for (var i = 1; i < numSavedFiles; i++) {
+								  //savedFiles[i+1]= USERS[0].savedFiles[i];  //USERS[0].savedFiles;
+							//	}
+							savedFiles=USERS[0].savedFiles;
+							userLocalName=USERS[0].userLocalName;
+
+							parameters.Load2 = savedFiles;
+		parameters.LoadC = savedFiles;
+		parameters.DelFile = savedFiles;
+		parameters.uLocalSelect = userLocalName[numUserL];
+		CLoad2.updateDisplay()
+		window.location.reload(false);
+		
+	//updateGuiT();
+	//init();
+	//gui.open();
+						
+	});
+	
+		/*var f7 = gui.addFolder('Select USER');
+		f7.add(text, 'USER_Select');
+		var uLChoose = f7.add( parameters, 'uLocalSelect', userLocalName ).name('Select USER').listen();*/
+		//parameters.uLocalName = userLocalName;
+		/*	for (var i = 0; i < Object.keys(gui.__folders).length; i++) {
+				var key = Object.keys(gui.__folders)[i];
+			for (var j = 0; j < gui.__folders[key].__controllers.length; j++ )
+			{
+				gui.__folders[key].__controllers[j].updateDisplay();
+			}
+			}*/
+		//nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn
+		//localStorage.removeItem(". ");
+		uLChoose.onChange(function(value) //User Function Create and Select
+	{   
+	  
+	  //if(value != "Create" & value != "NONE"){
+	   for (var i = 0; i < numUsers; i++) {
+	   if(value == userLocalName[i]){numUserL=i;}
+	    }
+	  	//	 userLocalName[numUserL-1]= text.USER_Name;
+		parameters.uLocalName = userLocalName[numUserL];
+		uLocalName = userLocalName[numUserL];
+		text.USER_Name=userLocalName[numUserL];
+		console.log(numUserL, "current and total users is", numUsers)
+		current[0]=uLocalName;
+		current[2]=numUserL;
+		current[1]=". ";
+
+		var USERS = [{
+			"current" : current,
+			"userLocalName" : userLocalName,
+			"numUsers" : numUsers,
+			//"userLocalPass" : "**************QWERTUIOPASDFGHJKLZXCVBNMQAZWSXEDCRFVTGBYHNUJMIKOLP*****************"+userLocalPass,
+			//"Rainbow" : Rainbow,
+			"savedFiles" : savedFiles
+			//"tetraName" : tetraName
+			}];
+		userObject = JSON.stringify(USERS, null, 100);
+		var fileUser = 'USERS';//userLocalName[numUserL];
+		localStorage.setItem(fileUser, userObject);	
+	
+	  //}
+		
+	   
+		parameters.Load2 = savedFiles;
+		parameters.LoadC = savedFiles;
+		parameters.DelFile = savedFiles;
+		parameters.uLocalSelect = userLocalName[numUserL];
+		//parameters.uLocalPass = "*****....********"
+
+			for (var i = 0; i < Object.keys(gui.__folders).length; i++) {
+				var key = Object.keys(gui.__folders)[i];
+			for (var j = 0; j < gui.__folders[key].__controllers.length; j++ )
+			{
+				gui.__folders[key].__controllers[j].updateDisplay();
+			}
+			}
+			console.log(".........",savedFiles[1],"........",savedFiles[2], "....",userLocalName[numUserL]);
+			window.location.reload(false);
+		
+						
+	});
+	//	var f7 = gui.addFolder('USER Password');
+	//	f7.add(text, 'UserPassword');
+	//	var uLN = f7.add( parameters, 'uLocalPass', [" ", "Save Password"] ).name('Enter Password').listen(); 
+	
+
+		rload.onChange(function(value)
+		{
+		  if(value == "Restart!"){window.location.reload(false);}
+		  if(value == "Design"){window.location.replace("file:////home/theunsdirkse-vanschalkwyk/Documents/TetraGenius/examples/TetraGeniusV008.Load.html");}
+		  if(value == "Game Levels"){window.location.replace("file:////home/theunsdirkse-vanschalkwyk/Documents/TetraGenius/examples/TetraGeniusV008.Game.html");}
+		  if(value == "Sfere's only"){window.location.replace("file:////home/theunsdirkse-vanschalkwyk/Documents/TetraGenius/examples/compact.html");}
+		 });
+	
+	cubeX.onChange(function(value) 
+	{   Xsym = value; }); 
+	cubeY.onChange(function(value) 
+	{   Ysym = value; }); 
+	cubeZ.onChange(function(value) 
+	{   Zsym = value; 
+		lightsP[ 0 ].intensity = Zsym;
+		lightsP[ 1 ].intensity = Zsym;
+		lightsP[ 2 ].intensity = Zsym;
+		directionalLight.intensity = Zsym;
+		}); 
+	cubeD.onChange(function(value) 
+	{   Doption = value; }); 
+	varyColor.onChange(function(value) 
+	{   Rainbow = value; }); 
+	//TBlock.onChange(function(value) 
+	//{   TransparentBlock = value; }); 
+	Design.onChange(function(value)  //---------------------------------------------------------------Loading new design block
+	{   addTetraName = value; 
+		addTetraFlag = tNames.indexOf(addTetraName);
+		camera.remove(objects[1]);
+		lightsP[ 0 ].color.setHex( 0x555555 );
+		//light3[ 0 ].color.setHex( 0xbbbbbb );
+		addTetraF();
+		}); 
+		Design2R.onChange(function(value) 
+	{   addTetraName2R = value;
+		addTetraFlag = tetNames.indexOf(addTetraName2R);
+		camera.remove(objects[1]);
+		lightsP[ 0 ].color.setHex( 0x555555 );
+		//light3[ 0 ].color.setHex( 0xffffff );
+		//addTetraF();
+		addTetraF();
+		}); 
+		Design2.onChange(function(value) 
+	{   addTetraName2 = value; 
+		addTetraFlag = tetNames.indexOf(addTetraName2);
+		camera.remove(objects[1]);
+		lightsP[ 0 ].color.setHex( 0x555555 );
+		//light3[ 0 ].color.setHex( 0xffffff );
+		//addTetraF();
+		addTetraF();
+		}); 
+		Design3.onChange(function(value) 
+	{   addTetraName3 = value; 
+		addTetraFlag = tetNames.indexOf(addTetraName3);
+		camera.remove(objects[1]);
+		lightsP[ 0 ].color.setHex( 0x555555 );
+		//light3[ 0 ].color.setHex( 0xffffff );
+		//addTetraF();
+		addTetraF();
+		}); 
+		Design4.onChange(function(value) //must be updated!!!
+	{   addTetraName4 = value; 
+		addTetraFlag = tetNames.indexOf(addTetraName4);
+		camera.remove(objects[1]);
+		lightsP[ 0 ].color.setHex( 0x555555 );
+		//light3[ 0 ].color.setHex( 0xffffff );
+		//addTetraF();
+		addTetraF();
+		}); 
+		Design5.onChange(function(value) //working on this "Central Africa","Antartica","Eurasia","Australia","Canada","Americas","EsherStair","GoldCopper","BlueIce","Silver","Glass","Green","Sandstone"
+
+	{   addTextureName = value; 
+		//Design.Change(" ");
+		if(addTextureName == "Central Africa"){texFlag = 1;} 
+		if(addTextureName == "Antartica"){texFlag  = 2;}
+		if(addTextureName == "Eurasia"){texFlag  = 3;} 
+		if(addTextureName == "Australia"){texFlag  = 4;}
+		if(addTextureName == "Canada"){texFlag = 5;} 
+		if(addTextureName == "Americas"){texFlag  = 6;}
+		if(addTextureName == "EsherStair"){texFlag  = 7;} 
+		if(addTextureName == "GoldCopper"){texFlag  = 8;}
+		if(addTextureName == "BlueIce"){texFlag = 9;} 
+		if(addTextureName == "Silver"){texFlag  = 10;}
+		if(addTextureName == "Glass"){texFlag  = 11;} 
+		if(addTextureName == "Green"){texFlag  = 12;}
+		if(addTextureName == "Sandstone"){texFlag  = 14;} 
+		if(addTextureName == "Leaf"){texFlag  = 14;} 
+		if(addTextureName == "Heart"){texFlag  = 15;} 
+		if(addTextureName == "Flowers"){texFlag  = 16;} 
+		if(addTextureName == " "){texFlag  = 0;}
+		//if(addTetraName3 == "Sphere4"){addTetraFlag = 35;} 
+		camera.remove(objects[1]);
+		lightsP[ 0 ].color.setHex( 0x555555 );
+		//light3[ 0 ].color.setHex( 0xffffff );
+		//addTetraF();
+		addTetraF();
+		}); 
+		DesignLoad2.onChange(function(value) // gui that loads designs-----------------------LOAD---------------------LOAD
+	{   //Load2 = text.Load_filename; 
+		if(value == '. ' || value == 'No file'){} else {
+		var loadxxx = value;
+		text.Load_filename = loadxxx;
+		Load2 = userLocalName[numUserL]+text.Load_filename;
+			for (var i = 0; i < Object.keys(gui.__folders).length; i++) {
+				var key = Object.keys(gui.__folders)[i];
+			for (var j = 0; j < gui.__folders[key].__controllers.length; j++ )
+			{
+				gui.__folders[key].__controllers[j].updateDisplay();
+			}
+			}
+		parameters.Load2 = " Loaded";
+		console.log("loadingQQQz............."+Load2);
+		loaded = LoadUserFile(Load2);
+			console.log("loadingQQQ............."+Load2);
+			gui.close();
+	gui.open();
+		}
+		
+		}); 
+		CLoad2.onChange(function(value) // gui that loads colors-----------------------LOAD---------------------LOAD
+	{   //LoadC = text.C_filename;
+		if(value == '. ' || value == 'No file'){} else {
+		var loadxxxC = value; 
+		LoadC = value;
+		text.C_filename = value;
+		loadxxxC = userLocalName[numUserL]+text.Load_filename;
+			for (var i = 0; i < Object.keys(gui.__folders).length; i++) {
+				var key = Object.keys(gui.__folders)[i];
+			for (var j = 0; j < gui.__folders[key].__controllers.length; j++ )
+			{
+				gui.__folders[key].__controllers[j].updateDisplay();
+			}
+			}
+		parameters.CLoad2 = " Loaded";
+		console.log("loadingQQQ............."+loadxxxC);
+		loaded = LoadUserFileC(loadxxxC,objects);
+			console.log("loadingQQQ............."+value);
+		gui.close();
+	gui.open();
+		}
+		}); 
+		
+		
+		MLoad2.onChange(function(value) //'visible', ["Sugar Man", "1","2","3", "4")
+	{   	
+	
+		visible = value; 
+		MusicTG.stop();
+		if(visible == "Silence"){} 
+		if(visible == "1"){playingNow = musicC[1];}
+		if(visible == "2"){playingNow = musicC[2];}
+		if(visible == "3"){playingNow = musicC[3];}
+		if(visible == "4"){playingNow = musicC[4];}
+		if(visible == "5"){playingNow = musicC[5];}
+		if(visible == "6"){playingNow = musicC[6];}
+		if(visible == "7"){playingNow = musicC[7];}
+		if(visible == "8"){playingNow = musicC[8];}
+		if(visible == "9"){playingNow = musicC[9];}
+		if(visible == "10"){playingNow = musicC[10];}
+		//Audio Audio Audio Audio Audio Audio Audio Audio Audio Audio Audio Audio
+	// load a resource
+loader.load(
+    // resource URL
+    playingNow,
+    // Function when resource is loaded
+    function ( audioBuffer ) {
+        // set the audio object buffer to the loaded object
+        MusicTG.setBuffer( audioBuffer );
+       // MusicTG.loop(audioBuffer);
+
+        // play the audio
+        MusicTG.play();
+        //MusicTG.stop();
+    },
+    // Function called when download progresses
+    function ( xhr ) {
+        console.log( (xhr.loaded / xhr.total * 100) + '% loaded' );
+        console.log( playingNow +'  loaded' );
+    },
+    // Function called when download errors
+    function ( xhr ) {
+        console.log( 'An error happened' );
+    });
+		
+						
+	});
+	
+		saveO2.onChange(function(value) //Design Saved here -----------------------------------------SAVE-----------------------------------SAVE--------
+	{   
+								var retrievedObjectU = localStorage.getItem("USERS");
+								var USERS = JSON.parse(retrievedObjectU);
+								//Rainbow = USERS[0].Rainbow;
+								savedFiles = USERS[0].savedFiles;
+								numSavedFiles = USERS[0].savedFiles.length;
+								if(savedFiles[1] == 'No file'){
+									var fileNameTet = text.Save_filename;
+									var savename = userLocalName[numUserL]+fileNameTet;
+									savedFiles[1] = savename;
+								}else {
+								console.log(numSavedFiles , "  HoWWWWWWWWW5555555555555555555555")
+															
+		var fileNameTet = text.Save_filename;
+		console.log("saving.............");
+		//var savexxx = value;
+		text.Save_filename = fileNameTet;
+		
+		
+		var savename = userLocalName[numUserL]+fileNameTet;
+		savedFiles[numSavedFiles] = savename;
+		console.log( userLocalName[numUserL]+"  Saving users file: "+numUserL);
+		//userLocalName[numUserL]= parameters.uLocalName
+		
+		/*var USERS = [{
+			"userLocalName" : userLocalName,
+			"numUsers" : numUsers,
+			//"userLocalPass" : "**************QWERTUIOPASDFGHJKLZXCVBNMQAZWSXEDCRFVTGBYHNUJMIKOLP*****************"+userLocalPass,
+			//"Rainbow" : 'OFF',
+			"savedFiles" : savedFiles,
+			//"tetraName" : tetraName
+			}];
+		
+		userObject = JSON.stringify(USERS, null, 100);*/
+		var fileUser = savename;
+		console.log(savename+'ddddddddddddddddddddddddddd');
+		//localStorage.setItem(fileUser, userObject);	
+								}
+								var fileNameTet = text.Save_filename;
+								var savename = userLocalName[numUserL]+fileNameTet;
+								var fileUser = savename;
+		//localStorage.removeItem(fileUser); //qaz
+		exportToObj(userLocalName[numUserL],fileNameTet,fileUser,numUsers,numUserL);   //exportToObj(myFolder,fileNameTet);//old
+		console.log(savename+"vvvvvvvvvvvvvvvvvvvvvvvvvvvv");
+		
+		numSavedFiles +=1;
+		parameters.Load2 = savedFiles;
+		parameters.LoadC = savedFiles;
+		parameters.DelFile = savedFiles;
+    parameters.uLocalName = userLocalName;
+    //gui.close();
+    //gui.open();
+			for (var i = 0; i < Object.keys(gui.__folders).length; i++) {
+				var key = Object.keys(gui.__folders)[i];
+			for (var j = 0; j < gui.__folders[key].__controllers.length; j++ )
+			{
+				gui.__folders[key].__controllers[j].updateDisplay();
+			}
+			}
+			//gui.close();
+    //gui.open();
+    //var saveO2 = f2.remove( parameters, 'saveOBJ2'); 
+	parameters.saveOBJ2 = [" ", " Save... "]; 
+	parameters.Load2 = savedFiles;
+		parameters.LoadC = savedFiles;
+		parameters.DelFile = savedFiles;
+	parameters.uLocalName = userLocalName;
+	CLoad2.updateDisplay()
+			console.log(".........",savedFiles[1],"........",savedFiles[2]);
+			//window.location.reload(false);
+						
+	});
+	
+	delF.onChange(function(value) //delete design from localsorage
+	{   	
+		gui.close();
+		var fileNameTet = value;
+		console.log("saving.............");
+		//var savexxx = value;
+		text.D_filename = fileNameTet;
+		var atP = savedFiles.indexOf(fileNameTet);
+		console.log(atP + "   delete this locally");
+		localStorage.removeItem(userLocalName[numUserL]+fileNameTet);         //working fine
+		savedFiles.splice(atP,1);                    //working fine
+		console.log(savedFiles[0]," ",savedFiles[1]);
+		numSavedFiles -=1;
+		var USERS = [{
+			"Rainbow" : Rainbow,
+			"savedFiles" : savedFiles,
+			"tetraName" : tetraName
+			}];
+		userObject = JSON.stringify(USERS, null, 100);
+		var fileUser = "USERS";
+		localStorage.setItem(fileUser, userObject);	
+		
+		//save02 = savedFiles;
+		parameters.Load2 = savedFiles;
+		parameters.LoadC = savedFiles;
+		parameters.DelFile = savedFiles;
+    parameters.uLocalSelect = userLocalName;
+			for (var i = 0; i < Object.keys(gui.__folders).length; i++) {
+				var key = Object.keys(gui.__folders)[i];
+			for (var j = 0; j < gui.__folders[key].__controllers.length; j++ )
+			{
+				gui.__folders[key].__controllers[j].updateDisplay();
+			}
+			}
+
+			gui.open();		
+			localStorage.removeItem(userLocalName[numUserL]+fileNameTet);         //working fine
+			window.location.reload(false);
+			
+	});
+	
+
+	
+	
+
+	///////////////////////////////////////////////////////////////////////////Menu change
+	
+	
+	cubeColor.onChange(function(value) // onFinishChange
+	{   materials[cii] = material15;
+		materials[cii].color.setHex( value.replace("#", "0x") ); 
+
+		 });
+		 
+
+	
+	gui.open();
+	
+	
+	
+								//Note that if you have the values in some folder folder1 the call is like this:
+
+/*for (var i = 0; i < gui.folder1.controllers.length; i++) {
+   gui.folder1.controllers[i].updateDisplay();
+}*/
+
+//If you do not want to hard-code folder1, or simply want to update all folders, you can proceed as follows:
+console.log(Rainbow);
+parameters.Rainbow = Rainbow;
+parameters.Load2 = savedFiles;
+parameters.LoadC = savedFiles;
+parameters.DelFile = savedFiles;
+parameters.uLocalName = userLocalName[numUserL];
+//parameters.addTetraName = addTetraUser;
+for (var i = 0; i < Object.keys(gui.__folders).length; i++) {
+    var key = Object.keys(gui.__folders)[i];
+    for (var j = 0; j < gui.__folders[key].__controllers.length; j++ )
+    {
+        gui.__folders[key].__controllers[j].updateDisplay();
+    }
+}
+
+	
+	addTetra();
+    
+  for (var i = 0; i < Object.keys(gui.__folders).length; i++) {
+    var key = Object.keys(gui.__folders)[i];
+    for (var j = 0; j < gui.__folders[key].__controllers.length; j++ )
+    {
+        gui.__folders[key].__controllers[j].updateDisplay();
+    }
+}
+  
+
+	
+	var newSphereGeom= new THREE.SphereGeometry(0.35,0.35,0.35);
+	var sphere= new THREE.Mesh(newSphereGeom, new THREE.MeshBasicMaterial({ color: 0xeeeeee }));
+	scene.add(sphere);
+	mouseSphere.push(sphere);
+	renderer.autoClear = false;
+	
+
+	
+
+			
+
+
+}
+
+
+function updateGuiT() //have to restart and load last file?
+{
+parameters.Rainbow = Rainbow;
+parameters.Load2 = savedFiles;
+parameters.LoadC = savedFiles;
+parameters.DelFile = savedFiles;
+parameters.uLocalName = [" ", "Create_User"];
+parameters.uLocalSelect = userLocalName;
+//parameters.addTetraName = addTetraUser;
+for (var i = 0; i < Object.keys(gui.__folders).length; i++) {
+    var key = Object.keys(gui.__folders)[i];
+    for (var j = 0; j < gui.__folders[key].__controllers.length; j++ )
+    {
+        gui.__folders[key].__controllers[j].updateDisplay();
+    }
+}
+console.log("should update the gui????")
+}
+
+
+function addTetra()
+{
+
+            
+            
+	var manager = new THREE.LoadingManager();
+				manager.onProgress = function ( item, loaded, total ) {
+
+					//console.log( item, loaded, total );
+
+				};
+
+			//	var texture = new THREE.Texture();
+			texture2 = new THREE.TextureLoader().load(textures[texFlag]); //'models/obj/sandstone4.jpg'); //'textures/UV_Grid_Sm1.jpg');
+				console.log( texFlag, " texFlag" );
+				var onProgress = function ( xhr ) {
+					if ( xhr.lengthComputable ) {
+						var percentComplete = xhr.loaded / xhr.total * 100;
+						//console.log( Math.round(percentComplete, 2) + '% downloaded' );
+					}
+				};
+
+				var onError = function ( xhr ) {
+				};
+
+
+				var loader = new THREE.ImageLoader( manager );
+				loader.load( textures[texFlag], function ( image ) {
+
+				//	texture.image = image;
+				//	texture.needsUpdate = true;
+
+				} );
+				//lambert = new THREE.MeshLambertMaterial({color: materials[cii].color, map: texture2});
+				lambert = new THREE.MeshLambertMaterial({color: material15.color, map: texture2});
+				// model
+				var textureLoader = new THREE.TextureLoader();
+
+				var earthTexture = textureLoader.load( 'roughness_map.jpg' );
+
+				var envMap = textureLoader.load( 'textures/envmap.png' );
+				envMap.mapping = THREE.SphericalReflectionMapping;
+
+				var materialsx = [
+
+					new THREE.MeshBasicMaterial( { color: 0x00ffff, wireframe: true, side: THREE.DoubleSide } ),
+					new THREE.MeshBasicMaterial( { color: 0xff0000, blending: THREE.AdditiveBlending } ),
+					new THREE.MeshLambertMaterial( { color: 0xffffff, overdraw: 0.5 } ),
+					new THREE.MeshLambertMaterial( { color: 0xffffff, overdraw: 0.5 } ),
+					new THREE.MeshNormalMaterial( { overdraw: 0.5 } ),
+					new THREE.MeshBasicMaterial( { envMap: earthTexture, overdraw: 0.5, side: THREE.DoubleSide } ),
+					new THREE.MeshBasicMaterial( { envMap: envMap, overdraw: 0.5 } )
+
+				];
+				if (addTetraFlag == 0) {
+					console.log("flag1111");
+//Loading Arrows
+					var loader = new THREE.OBJLoader( manager );
+				
+				loader.load( 'models/obj/arrows.obj', function ( objectX ) {
+											
+						objectX.material = lambert;  //materialsx[5];/
+					objectX.traverse( function ( child ) {
+						child.material = material999;  //lambert;  // materialsx[5];	
+					} );
+				//}, onProgress, onError );
+					objectX.scale.x = 0.99;
+					objectX.scale.y = 0.99;
+					objectX.scale.z = 0.99;		
+					
+
+					objects[999] = objectX.clone();    //clone
+					objects[999].material = objectX.material.clone();
+					var angleOb = Math.PI;
+
+					var sSWi = Math.floor(window.innerWidth/60);
+					console.log(sSWi);
+					var sSH = window.innerHeight/80;
+					var cxb = camera.position.x;
+					var cyb = camera.position.y;
+					var czb = camera.position.z;
+					//camera.position.set(0,-2.50,-30.195);
+					objects[999].scale.x = 0.8;  //arrows
+					objects[999].scale.y = 0.8;
+					objects[999].scale.z = 0.8;	
+					objects[999].position.x = 0;
+					objects[999].position.y = 0;
+					objects[999].position.z = 0;
+					objects[999].position.applyMatrix4( camera.matrixWorld );
+					objects[999].position.x = objects[999].position.x ;
+					objects[999].position.z = objects[999].position.z -8;
+					objects[999].position.y = objects[999].position.y + sSH;//window.innerHeight/80;
+					camera.add( objects[999]);
+					camera.position.set(cxb,cyb,czb);
+					console.log( cii + "  numbr" );
+					targetOBJ.push(objects[999]);
+					
+				});
+				loader.load( 'models/obj/text.obj', function ( objectX ) { //"Click in the green lines to start...The i-button gives more information.
+						
+						//objectX.material = lambert;  //materialsx[5];/
+					objectX.traverse( function ( child ) {
+						child.material = new THREE.MeshLambertMaterial({color: material15.color, map: texture2});  //lambert;  // materialsx[5];
+						
+					} );
+				//}, onProgress, onError );
+					objectX.scale.x = 0.99;
+					objectX.scale.y = 0.99;
+					objectX.scale.z = 0.99;		
+					
+					
+					objects[3] = objectX.clone();    //clone
+					objects[3].material = objectX.material.clone();
+					
+					
+					var angleOb = Math.PI;
+					
+					var sSWi = Math.floor(window.innerWidth/60);
+					console.log(sSWi);
+					var sSH = window.innerHeight/80;
+					var cxb = objects[3].position.x;
+					var cyb = objects[3].position.y;
+					var czb = objects[3].position.z-8;
+					//camera.position.set(0,-2.50,-30.195);
+					objects[3].scale.x = 0.9;   //example text
+					objects[3].scale.y = 0.9;
+					objects[3].scale.z = 0.9;	
+				
+					//objects[3].position.applyMatrix4( camera.matrixWorld );
+					objects[3].position.x = objects[3].position.x-7 ;
+					objects[3].position.z = objects[3].position.z+8;
+                    objects[3].position.y = objects[3].position.y+sSH/1.2;//window.innerHeight/80;
+                    objects[3].rotation.y = 0; //angleOb/1;
+					objects[3].position.applyMatrix4( camera.matrixWorld );
+				
+                   //scene.add(objects[3]);
+				   camera.add( objects[3]);
+					//camera.position.set(cxb,cyb,czb+20);
+                });
+					//end loading Arrows
+				var loader = new THREE.OBJLoader( manager );
+				
+				//loader.load( 'obj/arrows.obj', function ( objectX ) {
+					loader.load( designs[0], function ( objectX ) {
+						
+						objectX.material = lambert;  //materialsx[5];/
+					objectX.traverse( function ( child ) {
+						child.material = new THREE.MeshLambertMaterial({color: material15.color, map: texture2});  //lambert;  // materialsx[5];
+
+						//if ( child instanceof THREE.Mesh ) {
+
+							//child.material.map = texture2;
+
+						//}
+						
+					} );
+				//}, onProgress, onError );
+					objectX.scale.x = 0.99;
+					objectX.scale.y = 0.99;
+					objectX.scale.z = 0.99;		
+					
+					objects[2] = objectX.clone();    //clone
+					objects[2].material = objectX.material.clone();
+					objects[1] = objectX.clone();    //clone
+					objects[1].material = objectX.material.clone();
+					
+					object2 = objectX.clone();    //clone
+					//object2 = object2.toJSON();
+					object2.material = objectX.material.clone();
+						//object2.material = materials[cii];
+						//object2.material = material15;
+					
+					var angleOb = Math.PI;
+					//objects[2].rotation.x = -angleOb/2;
+					//objects[2].rotation.y = angleOb;
+					//objects[2].rotation.z = -angleOb/2;
+					//scene.add( objects[1] );
+					//THREE.SceneUtils.attach( objects[1], scene, camera );
+					var sSWi = Math.floor(window.innerWidth/60);
+					console.log(sSWi);
+					var sSH = window.innerHeight/80;
+					var cxb = camera.position.x;
+					var cyb = camera.position.y;
+					var czb = camera.position.z;
+					camera.position.set(0,-2.50,-30.195);
+					objects[1].scale.x = 0.9;   //example tetra
+					objects[1].scale.y = 0.9;
+					objects[1].scale.z = 0.9;	
+					objects[1].position.x = 0;
+					objects[1].position.y = 0;
+					objects[1].position.z = 0;
+					objects[1].position.applyMatrix4( camera.matrixWorld );
+					objects[1].position.x = objects[1].position.x ;
+					objects[1].position.z = objects[1].position.z -8;
+					objects[1].position.y = objects[1].position.y + sSH;//window.innerHeight/80;
+					//objects[1].rotation.x = 0;
+					//objects[1].position.z = 0;
+					//scene.add( objects[1] );
+					//THREE.SceneUtils.attach( objects[1], scene, camera );
+					
+					//scene.add( objects[2] );
+					camera.add( objects[1]);
+					camera.position.set(cxb,cyb,czb);
+					console.log( cii + "  numbr" );
+					//targetList.push(object[1]);
+					//targetList.push(object[2]);
+					targetOBJ.push(objects[1]);
+					targetOBJ.push(objects[2]);
+
+					  	///////////////start of basic geometry (clicked due to solid face and larger size)
+     	cii = 1;
+       	var loader = new THREE.TextureLoader();
+					var map1 = loader.load( 'textures/sprite.png' );
+					
+					//group = new THREE.Group();
+					//scene.add( group );
+					
+					//var map = new THREE.TextureLoader().load( 'textures/UV_Grid_Sm1.jpg' );
+					//map.wrapS = map.wrapT = THREE.RepeatWrapping;
+					//map.anisotropy = 16;
+					
+					//var material = new THREE.MeshLambertMaterial( { map1: map1, side: THREE.DoubleSide } );
+					var faceColorMaterial = new THREE.MeshLambertMaterial( 
+					{ color: 0xff0000, vertexColors: THREE.FaceColors,shading:THREE.FlatShading,polygonOffset: true,polygonOffsetUnits: 1,polygonOffsetFactor: 1} );
+			//ci += 1;		
+			//if ( ci == 9 ){ci = 1};
+	
+	
+	var TetraGeom = new THREE.Geometry();
+
+TetraGeom.vertices = [  // array of Vector3 giving vertex coordinates
+     
+        new THREE.Vector3( -2.00, 0, 1 ),    // vertex number 0
+        new THREE.Vector3( 2.00, 0, 1 ),   // vertex number 1
+        new THREE.Vector3( 0, -2, -1 ),  // vertex number 2
+        new THREE.Vector3( 0, 2, -1 )   // vertex number 3
+        ];
+            
+TetraGeom.faces = [  // array of Face3 giving the triangular faces
+        new THREE.Face3( 2, 1, 0 ),  //  bottom face
+        new THREE.Face3( 1, 2, 3 ),   // side face
+        new THREE.Face3( 0, 3, 2 ),  // remaining faces sides
+        new THREE.Face3( 3, 0, 1 )
+        ];
+        
+
+  TetraGeom.computeFaceNormals();
+  //TetraGeom.computeVertexNormals();    // requires correct face normals
+  octa= new THREE.Mesh( TetraGeom, material11 );
+ 
+	//pyramidGeom.position.set(position[0], position[2], position[1]);
+	// creates a wireMesh object
+	var wireOcta = new THREE.Mesh(TetraGeom, new THREE.MeshBasicMaterial({ color: 0x33ff33, wireframe: true, transparent: true, opacity: 1 }));
+	octa.add(wireOcta );
+	scene.add(octa);
+	// wireMesh object is added to the original as a sub-object
+	
+	
+	targetList.push(octa);
+	console.log(('000000'+material11.color.getHex().toString(16)).slice(-6) + "gethexcol");
+	TColour[cii] = ('000000'+material11.color.getHex().toString(16)).slice(-6);
+	
+	
+					
+
+				}, onProgress, onError );  //see line 396  end of addTetraFlag0
+			}
+				
+				
+}
+
+objects1.on('click', function(){
+    exportToObj();
+});
+
+function addTetraLC(cii,nametoload)
+{
+	//cii=+1;
+	//console.log(cii, ' colourZZZ  +cii); //"Colour" : TColour');
+			//var tttcol = ('000000'+retrievedObjectA[0].TColour[cii].toString(16)).slice(-6);
+            var retrievedObjectB = localStorage.getItem(nametoload);
+		retrievedObjectA = JSON.parse(retrievedObjectB);
+					var xxb = retrievedObjectA[0].possiX[cii]; 
+					var yyb = retrievedObjectA[0].possiY[cii];
+					var zzb = retrievedObjectA[0].possiZ[cii];
+						var xxxrot = retrievedObjectA[0].rotX[cii];
+						var yyyrot = retrievedObjectA[0].rotY[cii];
+						var zzzrot = retrievedObjectA[0].rotZ[cii];
+                        if(mirX[cii] == 1){Xsym = "ON";}
+					if (Xsym == "ON"){
+						console.log( "YayMirX!");
+						mirX[cii] = 1;
+						}
+                    if(mirY[cii] == 1){Ysym = "ON";}
+					if (Ysym == "ON"){mirY[cii] = 1;}
+                    if(mirXY[cii] == 1){Xsym = "ON";
+                                        Ysym = "ON";}
+					if (Ysym == "ON" & Xsym == "ON"){mirXY[cii] = 1;}
+						//var rotXX = retrievedObjectA[0].rotXX[cii];
+						//TColour[cii] = tttcol;
+				//console.log(TColour[cii] + ' colourZZZ ' +cii); //"Colour" : TColour,
+				//material15.color.setHex( "0x"+TColour[cii]);
+				//console.log(retrievedObjectA[0].TColour[cii] + ' colourYYYY ' +cii); //"Colour" : TColour,
+				//materials[cii] = new THREE.MeshLambertMaterial({color: material15.color, map: texture2});// material15.color, map: texture2});
+	var manager = new THREE.LoadingManager();
+				manager.onProgress = function ( item, loaded, total ) {
+
+					//console.log( item, loaded, total );
+
+				};
+
+			//	var texture = new THREE.Texture();
+			
+
+				var onProgress = function ( xhr ) {
+					if ( xhr.lengthComputable ) {
+						var percentComplete = xhr.loaded / xhr.total * 100;
+						//console.log( Math.round(percentComplete, 2) + '% downloaded' );
+					}
+				};
+
+				var onError = function ( xhr ) {
+				};
+			/*if(addTetraFlag==11){
+				texture2 = new THREE.TextureLoader().load('textures/UV_Grid_Sm1.jpg');
+				var loader = new THREE.ImageLoader( manager );
+				loader.load( 'textures/UV_Grid_Sm1.jpg', function ( image ) {
+
+				//	texture.image = image;
+				//	texture.needsUpdate = true;
+
+				} );
+			}
+			if(addTetraFlag==12){
+				texture2 = new THREE.TextureLoader().load('textures/UV_Grid_Sm2.jpg');
+				var loader = new THREE.ImageLoader( manager );
+				loader.load( 'textures/UV_Grid_Sm2.jpg', function ( image ) {
+
+				//	texture.image = image;
+				//	texture.needsUpdate = true;
+
+				} );
+			}
+						if(addTetraFlag==13){
+				texture2 = new THREE.TextureLoader().load('textures/UV_Grid_Sm3.jpg');
+				var loader = new THREE.ImageLoader( manager );
+				loader.load( 'textures/UV_Grid_Sm3.jpg', function ( image ) {
+
+				//	texture.image = image;
+				//	texture.needsUpdate = true;
+
+				} );
+			}
+			if(addTetraFlag==14){
+				texture2 = new THREE.TextureLoader().load('textures/UV_Grid_Sm4.jpg');
+				var loader = new THREE.ImageLoader( manager );
+				loader.load( 'textures/UV_Grid_Sm4.jpg', function ( image ) {
+
+				//	texture.image = image;
+				//	texture.needsUpdate = true;
+
+				} );
+			}
+						if(addTetraFlag==15){
+				texture2 = new THREE.TextureLoader().load('textures/UV_Grid_Sm5.jpg');
+				var loader = new THREE.ImageLoader( manager );
+				loader.load( 'textures/UV_Grid_Sm5.jpg', function ( image ) {
+
+				//	texture.image = image;
+				//	texture.needsUpdate = true;
+
+				} );
+			}
+			if(addTetraFlag==16){
+				texture2 = new THREE.TextureLoader().load('textures/UV_Grid_Sm6.jpg');
+				var loader = new THREE.ImageLoader( manager );
+				loader.load( 'textures/UV_Grid_Sm6.jpg', function ( image ) {
+
+				//	texture.image = image;
+				//	texture.needsUpdate = true;
+
+				} );
+			}
+			if(addTetraFlag==17){
+				texture2 = new THREE.TextureLoader().load('textures/UV_Grid_Sm7.jpg');
+				var loader = new THREE.ImageLoader( manager );
+				loader.load( 'textures/UV_Grid_Sm7.jpg', function ( image ) {
+
+				//	texture.image = image;
+				//	texture.needsUpdate = true;
+
+				} );
+			}
+			if(addTetraFlag==18){
+				texture2 = new THREE.TextureLoader().load('textures/UV_Grid_SmDNA.jpg');
+				var loader = new THREE.ImageLoader( manager );
+				loader.load( 'textures/UV_Grid_SmDNA.jpg', function ( image ) {
+
+				//	texture.image = image;
+				//	texture.needsUpdate = true;
+
+				} );
+			}
+			if(addTetraFlag==22){
+				texture2 = new THREE.TextureLoader().load('textures/UV_Grid_SmDNA.jpg');
+				var loader = new THREE.ImageLoader( manager );
+				loader.load( 'textures/UV_Grid_SmDNA.jpg', function ( image ) {
+
+				//	texture.image = image;
+				//	texture.needsUpdate = true;
+
+				} );
+			}
+			if(addTetraFlag==24){
+				texture2 = new THREE.TextureLoader().load('textures/UV_Grid_SmDNA.jpg');
+				var loader = new THREE.ImageLoader( manager );
+				loader.load( 'textures/UV_Grid_SmDNA.jpg', function ( image ) {
+
+				//	texture.image = image;
+				//	texture.needsUpdate = true;
+
+				} );
+			}
+			if(addTetraFlag==25){
+				texture2 = new THREE.TextureLoader().load('textures/silverMetal.jpg');
+				var loader = new THREE.ImageLoader( manager );
+				loader.load( 'textures/silverMetal.jpg', function ( image ) {
+
+				//	texture.image = image;
+				//	texture.needsUpdate = true;
+
+				} );
+			}
+			if(addTetraFlag==33){
+				texture2 = new THREE.TextureLoader().load('textures/skyScr4.jpg');
+				var loader = new THREE.ImageLoader( manager );
+				loader.load( 'textures/skyScr4.jpg', function ( image ) {
+
+					texture.image = image;
+					texture.needsUpdate = true;
+
+				} );
+			}
+			if(addTetraFlag==34){
+				texture2 = new THREE.TextureLoader().load('textures/greenMetal.jpg');
+				var loader = new THREE.ImageLoader( manager );
+				loader.load( 'textures/greenMetal.jpg', function ( image ) {
+
+	
+
+				} );
+			} */
+			
+
+				console.log(retrievedObjectA[0].possiX[cii] , ' possi ');
+
+					//if (addTetraFlag>42) {addTetraFlag=0;}
+			
+vv0x[cii] = retrievedObjectA[0].vv0x[cii];  
+vv0y[cii] = retrievedObjectA[0].vv0y[cii]; 
+vv0z[cii] = retrievedObjectA[0].vv0z[cii];  
+vv1x[cii] = retrievedObjectA[0].vv1x[cii];  
+vv1y[cii] = retrievedObjectA[0].vv1y[cii];  
+vv1z[cii] = retrievedObjectA[0].vv1z[cii]; 
+vv2x[cii] = retrievedObjectA[0].vv2x[cii]; 
+vv2y[cii] = retrievedObjectA[0].vv2y[cii];  
+vv2z[cii] = retrievedObjectA[0].vv2z[cii]; 
+vv3x[cii] = retrievedObjectA[0].vv3x[cii];  
+vv3y[cii] = retrievedObjectA[0].vv3y[cii];  
+vv3z[cii] = retrievedObjectA[0].vv3z[cii]; 
+			     	///////////////start of basic geometry (clicked due to solid face and larger size)
+     	console.log(vv0x[cii], " x ", vv3z, " z ",vv2y, " y ");
+        var TetraGeom = new THREE.Geometry();
+var ysum = vv0y+vv1y+vv2y+vv3y;
+var xsum = vv0x+vv1x+vv2x+vv3x;
+TetraGeom.vertices = [  // array of Vector3 giving vertex coordinates
+        new THREE.Vector3( vv0x[cii],vv0y[cii],vv0z[cii]),    // vertex number 0
+        new THREE.Vector3( vv1x[cii],vv1y[cii],vv1z[cii] ),   // vertex number 1
+        new THREE.Vector3( vv2x[cii],vv2y[cii],vv2z[cii] ),  // vertex number 2        
+        new THREE.Vector3( vv3x[cii],vv3y[cii],vv3z[cii])   // vertex number 3
+        ];
+
+	
+TetraGeom.faces = [  // array of Face3 giving the triangular faces
+        new THREE.Face3( 2, 1, 0 ),  //  bottom face
+        new THREE.Face3( 1, 2, 3 ),   // side face
+        new THREE.Face3( 0, 3, 2 ),  // remaining faces sides
+        new THREE.Face3( 3, 0, 1 )
+        ];
+	
+	    /*     if (Ysym =="ON")
+	         {
+	         if (ysum > 0.1)  {
+TetraGeom.faces = [  // array of Face3 giving the triangular faces
+        new THREE.Face3( 0, 1, 2 ),  //  bottom face
+        new THREE.Face3( 3, 2, 1 ),   // side face
+        new THREE.Face3( 2, 3, 0 ),  // remaining faces sides
+        new THREE.Face3( 1, 0, 3 )
+        ];}
+   
+		}
+			
+			 if (Xsym =="ON")
+	         {
+     
+          if (xsum > 0.1)  {
+TetraGeom.faces = [  // array of Face3 giving the triangular faces
+        new THREE.Face3( 0, 1, 2 ),  //  bottom face
+        new THREE.Face3( 3, 2, 1 ),   // side face
+        new THREE.Face3( 2, 3, 0 ),  // remaining faces sides
+        new THREE.Face3( 1, 0, 3 )
+        ];}
+    		}*/
+    		  
+  
+ TetraGeom.computeFaceNormals();
+  //TetraGeom.computeVertexNormals();    // requires correct face normals
+  octa= new THREE.Mesh( TetraGeom, material11 ); 
+  console.log(cii + "octa------------cii");
+	// creates a wireMesh object
+	//var wireOcta = new THREE.Mesh(TetraGeom, new THREE.MeshBasicMaterial({ color: 0x116611, wireframe: true }));
+	//octa.add(wireOcta );
+	octa.name = cii;
+	octa.userData = "NONO";
+	scene.add(octa);
+	// wireMesh object is added to the original as a sub-object
+	
+	targetList.push(octa);   //  end of tetra 1, 
+	
+	
+	/////////////////////////////////////////////////////////XXXXXSymmetry octa
+					if (Math.abs(xi)>0.8 & Xsym == "ON") 
+					{
+					var TetraGeom = new THREE.Geometry();
+var xsum = vv0x+vv1x+vv2x+vv3x;
+
+        TetraGeom.vertices = [  // array of Vector3 giving vertex coordinates
+        new THREE.Vector3( -vv0x,vv0y,vv0z),    // vertex number 0
+        new THREE.Vector3( -vv1x,vv1y,vv1z ),   // vertex number 1
+        new THREE.Vector3( -vv2x,vv2y,vv2z ),  // vertex number 2        
+        new THREE.Vector3( -vv3x,vv3y,vv3z)   // vertex number 3
+        ];
+
+TetraGeom.faces = [  // array of Face3 giving the triangular faces
+        new THREE.Face3( 0, 1, 2 ),  //  bottom face
+        new THREE.Face3( 3, 2, 1 ),   // side face
+        new THREE.Face3( 2, 3, 0 ),  // remaining faces sides
+        new THREE.Face3( 1, 0, 3 )
+        ];
+        
+
+  //TetraGeom.computeFaceNormals();
+  
+  octaX= new THREE.Mesh( TetraGeom, material11 );
+ 	octaX.name = cii+1000;
+     octaX.userData = "NONO";
+					
+	scene.add(octaX);
+		
+	targetList.push(octaX);		   //end of octa x//////////////////////////xxxxxxxxxxxSymetry END
+				}
+	/////////////////////////////////////////////////////////YYYYYYYYYSymmetry   octa
+					if (Math.abs(yi)>0.8 & Ysym == "ON") 
+					{
+						var TetraGeom = new THREE.Geometry();
+var ysum = vv0y+vv1y+vv2y+vv3y;
+
+        TetraGeom.vertices = [  // array of Vector3 giving vertex coordinates
+        new THREE.Vector3( vv0x,-vv0y,vv0z),    // vertex number 0
+        new THREE.Vector3( vv1x,-vv1y,vv1z ),   // vertex number 1
+        new THREE.Vector3( vv2x,-vv2y,vv2z ),  // vertex number 2        
+        new THREE.Vector3( vv3x,-vv3y,vv3z)   // vertex number 3
+        ];
+         
+TetraGeom.faces = [  // array of Face3 giving the triangular faces
+        new THREE.Face3( 0, 1, 2 ),  //  bottom face
+        new THREE.Face3( 3, 2, 1 ),   // side face
+        new THREE.Face3( 2, 3, 0 ),  // remaining faces sides
+        new THREE.Face3( 1, 0, 3 )
+        ];
+        
+        
+
+  //TetraGeom.computeFaceNormals();
+  //TetraGeom.computeVertexNormals();    // requires correct face normals
+  octaY= new THREE.Mesh( TetraGeom, material11 );
+ 	octaY.name = cii+2000;
+					//octaY.position.y =  -yi;
+					//octaY.position.z =  zi;
+					//octaY.position.x =  xi;
+					
+					
+					//octaY.rotation.x = -angleObx;
+					//octaY.rotation.y = angleOby;
+					//octaY.rotation.z = angleObz;
+	// creates a wireMesh object
+	//var wireOcta = new THREE.Mesh(TetraGeom, new THREE.MeshBasicMaterial({ color: 0x116611, wireframe: true, transparent: true, opacity: 0.5 }));
+	//octaY.add(wireOcta );
+	scene.add(octaY);
+    octaY.userData = "NONO";
+	// wireMesh object is added to the original as a sub-object
+	
+	
+	targetList.push(octaY);		   //  end of octa y,  ///////////////////////////YYYYYYYYYYYYYYSymetry END
+				}
+				
+				 if (Xsym =="ON" & Ysym =="ON")
+	         {
+				 var TetraGeom = new THREE.Geometry();
+var ysum = vv0y+vv1y+vv2y+vv3y;
+var xsum = vv0x+vv1x+vv2x+vv3x;
+
+        TetraGeom.vertices = [  // array of Vector3 giving vertex coordinates
+        new THREE.Vector3( -vv0x,-vv0y,vv0z),    // vertex number 0
+        new THREE.Vector3( -vv1x,-vv1y,vv1z ),   // vertex number 1
+        new THREE.Vector3( -vv2x,-vv2y,vv2z ),  // vertex number 2        
+        new THREE.Vector3( -vv3x,-vv3y,vv3z)   // vertex number 3
+        ];
+     
+         /* if (Math.abs(xsum) > 0.1 & Math.abs(ysum) > 0.1)  {*/
+TetraGeom.faces = [  // array of Face3 giving the triangular faces
+        new THREE.Face3( 2, 1, 0 ),  //  bottom face
+        new THREE.Face3( 1, 2, 3 ),   // side face
+        new THREE.Face3( 0, 3, 2 ),  // remaining faces sides
+        new THREE.Face3( 3, 0, 1 )
+        ];
+         if (xsum > 0.1 & ysum < -0.1)  {
+TetraGeom.faces = [  // array of Face3 giving the triangular faces
+        new THREE.Face3( 0, 1, 2 ),  //  bottom face
+        new THREE.Face3( 3, 2, 1 ),   // side face
+        new THREE.Face3( 2, 3, 0 ),  // remaining faces sides
+        new THREE.Face3( 1, 0, 3 )
+        ];}
+         if (xsum < -0.1 & ysum > 0.1)  {
+TetraGeom.faces = [  // array of Face3 giving the triangular faces
+        new THREE.Face3( 0, 1, 2 ),  //  bottom face
+        new THREE.Face3( 3, 2, 1 ),   // side face
+        new THREE.Face3( 2, 3, 0 ),  // remaining faces sides
+        new THREE.Face3( 1, 0, 3 )
+        ];}
+        if (xsum < -0.1 & ysum < -0.1)  {
+TetraGeom.faces = [  // array of Face3 giving the triangular faces
+        new THREE.Face3( 2, 1, 0 ),  //  bottom face
+        new THREE.Face3( 1, 2, 3 ),   // side face
+        new THREE.Face3( 0, 3, 2 ),  // remaining faces sides
+        new THREE.Face3( 3, 0, 1 )
+        ];}
+        TetraGeom.computeFaceNormals();
+    octaXY= new THREE.Mesh( TetraGeom, material11 );
+ 	octaXY.name = cii+3000;
+     octaXY.userData = "NONO";
+			
+	scene.add(octaXY);
+	// wireMesh object is added to the original as a sub-object
+	
+	
+	targetList.push(octaXY);		   //  end of octa xy,  ///////////////////////////YYYYYYYYYYYYYYSymetry END
+    		}
+
+            scene.traverse( function( node ) {
+
+if ( node instanceof THREE.Object3D ) {  //Mesh
+    node.userData = "NONO"; 
+        
+}
+
+});
+
+scene2.traverse( function( node ) {  /// junk code
+
+if ( node instanceof THREE.Object3D ) {  //Mesh
+    node.userData = "NONO"; 
+        
+}
+
+});  //junk code
+				
+	
+	
+	
+}
+
+function addTetraL(cii)
+{
+	//cii=+1;
+	//console.log(cii, ' colourZZZ  +cii); //"Colour" : TColour');
+			//var tttcol = ('000000'+retrievedObjectA[0].TColour[cii].toString(16)).slice(-6);
+					var xxb = retrievedObjectA[0].possiX[cii]; 
+					var yyb = retrievedObjectA[0].possiY[cii];
+					var zzb = retrievedObjectA[0].possiZ[cii];
+						var xxxrot = retrievedObjectA[0].rotX[cii];
+						var yyyrot = retrievedObjectA[0].rotY[cii];
+						var zzzrot = retrievedObjectA[0].rotZ[cii];
+						//var rotXX = retrievedObjectA[0].rotXX[cii];
+						//TColour[cii] = tttcol;
+				//console.log(TColour[cii] + ' colourZZZ ' +cii); //"Colour" : TColour,
+				//material15.color.setHex( "0x"+TColour[cii]);
+				//console.log(retrievedObjectA[0].TColour[cii] + ' colourYYYY ' +cii); //"Colour" : TColour,
+				//materials[cii] = new THREE.MeshLambertMaterial({color: material15.color, map: texture2});// material15.color, map: texture2});
+	var manager = new THREE.LoadingManager();
+				manager.onProgress = function ( item, loaded, total ) {
+
+					//console.log( item, loaded, total );
+
+				};
+
+			//	var texture = new THREE.Texture();
+			
+
+				var onProgress = function ( xhr ) {
+					if ( xhr.lengthComputable ) {
+						var percentComplete = xhr.loaded / xhr.total * 100;
+						//console.log( Math.round(percentComplete, 2) + '% downloaded' );
+					}
+				};
+
+				var onError = function ( xhr ) {
+				};
+			/* if(addTetraFlag==11){
+				texture2 = new THREE.TextureLoader().load('textures/UV_Grid_Sm1.jpg');
+				var loader = new THREE.ImageLoader( manager );
+				loader.load( 'textures/UV_Grid_Sm1.jpg', function ( image ) {
+
+				//	texture.image = image;
+				//	texture.needsUpdate = true;
+
+				} );
+			}
+			if(addTetraFlag==12){
+				texture2 = new THREE.TextureLoader().load('textures/UV_Grid_Sm2.jpg');
+				var loader = new THREE.ImageLoader( manager );
+				loader.load( 'textures/UV_Grid_Sm2.jpg', function ( image ) {
+
+				//	texture.image = image;
+				//	texture.needsUpdate = true;
+
+				} );
+			}
+						if(addTetraFlag==13){
+				texture2 = new THREE.TextureLoader().load('textures/UV_Grid_Sm3.jpg');
+				var loader = new THREE.ImageLoader( manager );
+				loader.load( 'textures/UV_Grid_Sm3.jpg', function ( image ) {
+
+				//	texture.image = image;
+				//	texture.needsUpdate = true;
+
+				} );
+			}
+			if(addTetraFlag==14){
+				texture2 = new THREE.TextureLoader().load('textures/UV_Grid_Sm4.jpg');
+				var loader = new THREE.ImageLoader( manager );
+				loader.load( 'textures/UV_Grid_Sm4.jpg', function ( image ) {
+
+				//	texture.image = image;
+				//	texture.needsUpdate = true;
+
+				} );
+			}
+						if(addTetraFlag==15){
+				texture2 = new THREE.TextureLoader().load('textures/UV_Grid_Sm5.jpg');
+				var loader = new THREE.ImageLoader( manager );
+				loader.load( 'textures/UV_Grid_Sm5.jpg', function ( image ) {
+
+				//	texture.image = image;
+				//	texture.needsUpdate = true;
+
+				} );
+			}
+			if(addTetraFlag==16){
+				texture2 = new THREE.TextureLoader().load('textures/UV_Grid_Sm6.jpg');
+				var loader = new THREE.ImageLoader( manager );
+				loader.load( 'textures/UV_Grid_Sm6.jpg', function ( image ) {
+
+				//	texture.image = image;
+				//	texture.needsUpdate = true;
+
+				} );
+			}
+			if(addTetraFlag==17){
+				texture2 = new THREE.TextureLoader().load('textures/UV_Grid_Sm7.jpg');
+				var loader = new THREE.ImageLoader( manager );
+				loader.load( 'textures/UV_Grid_Sm7.jpg', function ( image ) {
+
+				//	texture.image = image;
+				//	texture.needsUpdate = true;
+
+				} );
+			}
+			if(addTetraFlag==18){
+				texture2 = new THREE.TextureLoader().load('textures/UV_Grid_SmDNA.jpg');
+				var loader = new THREE.ImageLoader( manager );
+				loader.load( 'textures/UV_Grid_SmDNA.jpg', function ( image ) {
+
+				//	texture.image = image;
+				//	texture.needsUpdate = true;
+
+				} );
+			}
+			if(addTetraFlag==22){
+				texture2 = new THREE.TextureLoader().load('textures/UV_Grid_SmDNA.jpg');
+				var loader = new THREE.ImageLoader( manager );
+				loader.load( 'textures/UV_Grid_SmDNA.jpg', function ( image ) {
+
+				//	texture.image = image;
+				//	texture.needsUpdate = true;
+
+				} );
+			}
+			if(addTetraFlag==24){
+				texture2 = new THREE.TextureLoader().load('textures/UV_Grid_SmDNA.jpg');
+				var loader = new THREE.ImageLoader( manager );
+				loader.load( 'textures/UV_Grid_SmDNA.jpg', function ( image ) {
+
+				//	texture.image = image;
+				//	texture.needsUpdate = true;
+
+				} );
+			}
+			if(addTetraFlag==25){
+				texture2 = new THREE.TextureLoader().load('textures/silverMetal.jpg');
+				var loader = new THREE.ImageLoader( manager );
+				loader.load( 'textures/UV_Grid_SmDNA.jpg', function ( image ) {
+
+				//	texture.image = image;
+				//	texture.needsUpdate = true;
+
+				} );
+			}
+			if(addTetraFlag==33){
+				texture2 = new THREE.TextureLoader().load('textures/skyScr4.jpg');
+				var loader = new THREE.ImageLoader( manager );
+				loader.load( 'textures/skyScr4.jpg', function ( image ) {
+
+					texture.image = image;
+					texture.needsUpdate = true;
+
+				} );
+			}
+			if(addTetraFlag==34){
+				texture2 = new THREE.TextureLoader().load('textures/greenMetal.jpg');
+				var loader = new THREE.ImageLoader( manager );
+				loader.load( 'textures/greenMetal.jpg', function ( image ) {
+
+	
+
+				} );
+			} */
+			
+
+				console.log(retrievedObjectA[0].possiX[cii] , ' possi ');
+
+					if (addTetraFlag>42) {addTetraFlag=0;}
+				if (addTetraFlag != -1) {
+					
+
+				var loader = new THREE.OBJLoader( manager );
+				
+				//loader.load( 'obj/Tetra2.obj', function ( object ) {
+					loader.load( designs[addTetraFlag], function ( objectX ) {
+						//lambert = new THREE.MeshLambertMaterial({color: materials[cii].color, map: texture2});
+						//objectX.material = new THREE.MeshLambertMaterial({color: materials[cii].color, map: texture2});
+					objectX.traverse( function ( child ) {
+						//child.material = new THREE.MeshLambertMaterial({color: materials[cii].color, transparent: true, opacity: 1}); //map: texture2});  //lambert;  // materialsx[5];
+					} );
+				//}, onProgress, onError );
+					objectX.scale.x = 0.99;
+					objectX.scale.y = 0.99;
+					objectX.scale.z = 0.99;	
+
+					objects[cii] = objectX.clone();    //clone66666666666666666666666666666666666666666666666666666666666666666666
+                console.log(cii,"objectsload");
+                        xi = retrievedObjectA[0].possiX[cii]; 
+					    yi = retrievedObjectA[0].possiY[cii];
+					    zi = retrievedObjectA[0].possiZ[cii];
+						angleObx = retrievedObjectA[0].rotX[cii];
+						angleOby = retrievedObjectA[0].rotY[cii];
+						angleObz = retrievedObjectA[0].rotZ[cii];
+                        
+                        var angleOb = Math.PI;//6666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666
+					
+					var sSWi = Math.floor(window.innerWidth/1910)*16;
+					
+					var sSH = window.innerHeight/60;
+					/*objects[cii].scale.x = 0.99;
+					objects[cii].scale.y = 0.99;
+					objects[cii].scale.z = 0.99;*/	
+					objects[cii].position.applyMatrix4( camera.matrixWorld );
+					objects[cii].position.x = xxb;
+					objects[cii].position.z = zzb;
+					objects[cii].position.y = yyb;
+					objects[cii].rotation.x = xxxrot;
+					objects[cii].rotation.y = yyyrot;
+					objects[cii].rotation.z = zzzrot;
+                
+					
+					objects[cii].position.y =  yi;
+					objects[cii].position.z =  zi;
+					objects[cii].position.x =  xi;
+					/*possiX[cii] = xi; 
+					possiY[cii] = yi;
+					possiZ[cii] = zi;
+					TFlagNum[cii] = addTetraFlag;*/
+
+                    
+					
+					
+					objects[cii].rotation.x = angleObx;
+					objects[cii].rotation.y = angleOby;
+					objects[cii].rotation.z = angleObz;
+					/*rotX[cii] = angleObx; 
+					rotY[cii] = angleOby;
+					rotZ[cii] = angleObz;*/
+					objects[cii].name = cii;
+					objects[cii].userData = cii;
+					objects[cii].userSTL = "Y";
+					objects[cii].userCol = TColour[cii];
+					
+					scene2.add( objects[cii] );
+					scene.add( objects[cii] );
+                    
+					if(mirX[cii] == 1){Xsym = "ON";}
+					if (Xsym == "ON"){
+						console.log( "YayMirX!");
+						mirX[cii] = 1;
+						}
+                    if(mirY[cii] == 1){Ysym = "ON";}
+					if (Ysym == "ON"){mirY[cii] = 1;}
+                    if(mirXY[cii] == 1){Xsym = "ON";
+                                        Ysym = "ON";}
+					if (Ysym == "ON" & Xsym == "ON"){mirXY[cii] = 1;}
+					//objects[cii].name = "NONO";
+                    
+					
+					console.log( cii + "numbr" +  objects[cii].nameX + "Yay");
+					console.log( cii + "numbr" +  objects[cii].name + "Nay");
+					targetOBJ.push(objects[cii].name);
+					TColour[cii] = ('000000'+material15.color.getHex().toString(16)).slice(-6);
+					console.log(Xsym);
+					
+					/////////////////////////////////////////////////////////XXXXXSymetry
+					if (Math.abs(xi)>0.8 & Xsym == "ON") 
+					{
+					
+					objects[cii+1000] = objectX.clone();   //clone object in array +1000, but save variables in possiX Xsym[cii] !!! etc
+					//objects[cii+1000].material = objectX.material.clone();
+					lambert = new THREE.MeshLambertMaterial({color: TColour[cii].color, map: texture2});
+						objects[cii+1000].traverse( function ( child ) {
+						//child.material = lambert;						
+					} );
+					
+					objects[cii+1000].position.y =  yi;
+					objects[cii+1000].position.z =  zi;
+					objects[cii+1000].position.x =  -xi;
+					
+					
+					objects[cii+1000].rotation.x = angleObx;
+					objects[cii+1000].rotation.y = -angleOby;
+					objects[cii+1000].rotation.z = angleObz;
+					/*possiYX[cii] = yi;
+					possiZX[cii] = zi;
+					possiXX[cii] = -xi;
+					TFlagNumX[cii] = addTetraFlag;
+					TColourX[cii] = ('000000'+lambert.color.getHex().toString(16)).slice(-6);
+					rotXX[cii] = angleObx; 
+					rotYX[cii] = -angleOby;
+					rotZX[cii] = angleObz;*/
+					objects[cii+1000].name = cii+1000;
+					objects[cii+1000].userData = cii+1000;
+					
+					scene2.add( objects[cii+1000] );
+                    scene.add( objects[cii+1000] );
+                    objects[cii+1000].userCol = TColour[cii];
+					console.log( cii + "numbr" +  objects[cii+1000].name);
+					
+					//console.log( cii + "numbr" );
+					targetOBJ.push(objects[cii+1000]); ///////////////////////////xxxxxxxxxxxSymetry END
+				}
+							
+				
+					/////////////////////////////////////////////////////////YYYYYYYYYSymetry
+					if (Math.abs(yi)>0.8 & Ysym == "ON") 
+					{
+						//ciiY = ciiY +1;
+					objects[cii+2000] = objectX.clone();   //clone
+					//objects[cii+2000].material = objectX.material.clone();
+					lambert = new THREE.MeshLambertMaterial({color: TColour[cii].color, map: texture2});
+					
+					objects[cii+2000].traverse( function ( child ) {
+						//child.material = lambert;						
+					} );
+					
+					objects[cii+2000].position.y =  -yi;
+					objects[cii+2000].position.z =  zi;
+					objects[cii+2000].position.x =  xi;
+					
+					
+					objects[cii+2000].rotation.x = -angleObx;
+					objects[cii+2000].rotation.y = angleOby;
+					objects[cii+2000].rotation.z = angleObz;
+					/*possiYY[cii] = -yi;
+					possiZY[cii] = zi;
+					possiXY[cii] = xi;
+					TFlagNumY[cii] = addTetraFlag;
+					TColourY[cii] = ('000000'+lambert.color.getHex().toString(16)).slice(-6);
+					rotXY[cii] = -angleObx; 
+					rotYY[cii] = angleOby;
+					rotZY[cii] = angleObz;*/
+					objects[cii+2000].name = cii+2000;
+                    objects[cii+2000].userData = cii+2000;
+					
+					scene2.add( objects[cii+2000] );
+					scene.add( objects[cii+2000] );
+					objects[cii+2000].userCol = TColour[cii];
+					console.log( cii + "numbr" +  objects[cii+2000].name);
+					
+					//console.log( cii + "numbr" );
+					targetOBJ.push(objects[cii+2000]); ///////////////////////////YYYYYYYYYYYYYYSymetry END
+					
+	
+				}
+
+					/////////////////////////////////////////////////////////XXXXXXXXXXXXYYYYYYYYYSymetry
+					if (Math.abs(yi)>0.8 &  Math.abs(xi) > 0.8 & Xsym =="ON" & Ysym == "ON") 
+					{
+						//ciiXY = ciiXY +1;
+					objects[cii+3000] = objectX.clone();   //clone
+					//objects[cii+3000].material = objectX.material.clone();
+					lambert = new THREE.MeshLambertMaterial({color: TColour[cii].color, map: texture2});
+					
+					objects[cii+3000].traverse( function ( child ) {
+						//child.material = lambert;						
+					} );
+					
+					objects[cii+3000].position.y =  -yi;
+					objects[cii+3000].position.z =  zi;
+					objects[cii+3000].position.x =  -xi;
+					
+					
+					objects[cii+3000].rotation.x = -angleObx;
+					objects[cii+3000].rotation.y = -angleOby;
+					objects[cii+3000].rotation.z = angleObz;
+					/*possiYXY[cii] = -yi;
+					possiZXY[cii] = zi;
+					possiXXY[cii] = -xi;
+					TFlagNumXY[cii] = addTetraFlag;
+					TColourXY[cii] = ('000000'+lambert.color.getHex().toString(16)).slice(-6);
+					rotXXY[cii] = -angleObx; 
+					rotYXY[cii] = -angleOby;
+					rotZXY[cii] = angleObz;*/
+					objects[cii+3000].name = cii+3000;
+                    objects[cii+3000].userData = cii+3000;
+                    objects[cii+3000].userCol = TColour[cii];
+					scene.add( objects[cii+3000] );
+					scene3.add( objects[cii+3000] );
+					
+					console.log( cii + "numbr" +  objects[cii+3000].name);
+					
+					//console.log( cii + "numbr" );
+					targetOBJ.push(objects[cii+3000]); ///////////////////////////XXXXXXXXXXXxYYYYYYYYYYYYYYSymetry END
+				}
+					
+
+	//objects[cii].name = "NONO";
+    //objects[cii].userData = cii;
+	//scene.add( objects[cii] );
+	objects[cii].name = cii;
+	targetOBJ.push(objects[cii].name);
+					
+
+				}, onProgress, onError );  //see line 396  end of addTetraFlag0
+			}
+}
+function addTetraF()     //Loads the tetraBlock in the background---------------------------loads tetrablock--------------------
+{
+	texture2 = new THREE.TextureLoader().load(textures[texFlag]);
+				var loader = new THREE.ImageLoader( manager );
+				loader.load( textures[texFlag], function ( image ) {
+
+				//	texture.image = image;
+				//	texture.needsUpdate = true;
+
+				} );
+	var manager = new THREE.LoadingManager();
+				manager.onProgress = function ( item, loaded, total ) {
+
+					//console.log( item, loaded, total );
+
+				};
+
+			//	var texture = new THREE.Texture();
+			
+
+				var onProgress = function ( xhr ) {
+					if ( xhr.lengthComputable ) {
+						var percentComplete = xhr.loaded / xhr.total * 100;
+						//console.log( Math.round(percentComplete, 2) + '% downloaded' );
+					}
+				};
+
+				var onError = function ( xhr ) {
+				};
+			/* if(addTetraFlag==11){
+				texture2 = new THREE.TextureLoader().load('textures/UV_Grid_Sm1.jpg');
+				var loader = new THREE.ImageLoader( manager );
+				loader.load( 'textures/UV_Grid_Sm1.jpg', function ( image ) {
+
+				//	texture.image = image;
+				//	texture.needsUpdate = true;
+
+				} );
+			}
+			if(addTetraFlag==12){
+				texture2 = new THREE.TextureLoader().load('textures/UV_Grid_Sm2.jpg');
+				var loader = new THREE.ImageLoader( manager );
+				loader.load( 'textures/UV_Grid_Sm2.jpg', function ( image ) {
+
+				//	texture.image = image;
+				//	texture.needsUpdate = true;
+
+				} );
+			}
+						if(addTetraFlag==13){
+				texture2 = new THREE.TextureLoader().load('textures/UV_Grid_Sm3.jpg');
+				var loader = new THREE.ImageLoader( manager );
+				loader.load( 'textures/UV_Grid_Sm3.jpg', function ( image ) {
+
+				//	texture.image = image;
+				//	texture.needsUpdate = true;
+
+				} );
+			}
+			if(addTetraFlag==14){
+				texture2 = new THREE.TextureLoader().load('textures/UV_Grid_Sm4.jpg');
+				var loader = new THREE.ImageLoader( manager );
+				loader.load( 'textures/UV_Grid_Sm4.jpg', function ( image ) {
+
+				//	texture.image = image;
+				//	texture.needsUpdate = true;
+
+				} );
+			}
+						if(addTetraFlag==15){
+				texture2 = new THREE.TextureLoader().load('textures/UV_Grid_Sm5.jpg');
+				var loader = new THREE.ImageLoader( manager );
+				loader.load( 'textures/UV_Grid_Sm5.jpg', function ( image ) {
+
+				//	texture.image = image;
+				//	texture.needsUpdate = true;
+
+				} );
+			}
+			if(addTetraFlag==16){
+				texture2 = new THREE.TextureLoader().load('textures/UV_Grid_Sm6.jpg');
+				var loader = new THREE.ImageLoader( manager );
+				loader.load( 'textures/UV_Grid_Sm6.jpg', function ( image ) {
+
+				//	texture.image = image;
+				//	texture.needsUpdate = true;
+
+				} );
+			}
+			if(addTetraFlag==17){
+				texture2 = new THREE.TextureLoader().load('textures/UV_Grid_Sm7.jpg');
+				var loader = new THREE.ImageLoader( manager );
+				loader.load( 'textures/UV_Grid_Sm7.jpg', function ( image ) {
+
+				//	texture.image = image;
+				//	texture.needsUpdate = true;
+
+				} );
+			}
+			/*if(addTetraFlag==18){
+				texture2 = new THREE.TextureLoader().load('textures/UV_Grid_SmDNA.jpg');
+				var loader = new THREE.ImageLoader( manager );
+				loader.load( 'textures/UV_Grid_SmDNA.jpg', function ( image ) {
+
+				//	texture.image = image;
+				//	texture.needsUpdate = true;
+
+				} );
+			}
+			if(addTetraFlag==22){
+				texture2 = new THREE.TextureLoader().load('textures/UV_Grid_SmDNA.jpg');
+				var loader = new THREE.ImageLoader( manager );
+				loader.load( 'textures/UV_Grid_SmDNA.jpg', function ( image ) {
+
+				//	texture.image = image;
+				//	texture.needsUpdate = true;
+
+				} );
+			}
+			if(addTetraFlag==24){
+				texture2 = new THREE.TextureLoader().load('textures/UV_Grid_SmDNA.jpg');
+				var loader = new THREE.ImageLoader( manager );
+				loader.load( 'textures/UV_Grid_SmDNA.jpg', function ( image ) {
+
+				//	texture.image = image;
+				//	texture.needsUpdate = true;
+
+				} );
+			}
+			if(addTetraFlag==25){
+				texture2 = new THREE.TextureLoader().load('textures/silverMetal.jpg');
+				var loader = new THREE.ImageLoader( manager );
+				loader.load( 'textures/UV_Grid_SmDNA.jpg', function ( image ) {
+
+				//	texture.image = image;
+				//	texture.needsUpdate = true;
+
+				} );
+			}
+			if(addTetraFlag==33){
+				texture2 = new THREE.TextureLoader().load('textures/skyScr4.jpg');
+				var loader = new THREE.ImageLoader( manager );
+				loader.load( 'textures/skyScr4.jpg', function ( image ) {
+
+					texture.image = image;
+					texture.needsUpdate = true;
+
+				} );
+			}
+			if(addTetraFlag==34){
+				texture2 = new THREE.TextureLoader().load(textures[texFlag]);
+				var loader = new THREE.ImageLoader( manager );
+				loader.load( textures[texFlag], function ( image ) {
+
+				//	texture.image = image;
+				//	texture.needsUpdate = true;
+
+				} );
+			} */
+				//lambert = new THREE.MeshLambertMaterial({color: materials[cii].color, map: texture2});
+				lambert = new THREE.MeshLambertMaterial({color: material15.color, map: texture2});
+				// model
+				var textureLoader = new THREE.TextureLoader();
+
+					var xxb = objects[1].position.x;
+					var yyb = objects[1].position.y;
+					var zzb = objects[1].position.z;
+					//scene.remove(objects[1]);
+					camera.remove(objects[1]);
+					
+					var cxb = camera.position.x;
+					var cyb = camera.position.y;
+					var czb = camera.position.z;
+					//camera.position.set(0,-2.50,-30.195);
+					//targetList.splice( targetList.indexOf( objects[0] ), 1 );
+					if (addTetraFlag>42) {addTetraFlag=0;}
+				if (addTetraFlag != -1) {
+					
+
+				var loader = new THREE.OBJLoader( manager );
+				
+				//loader.load( 'obj/Tetra2.obj', function ( object ) {
+					loader.load( designs[addTetraFlag], function ( objectX ) {
+						
+						objectX.material = lambert;  //materialsx[5];/
+					objectX.traverse( function ( child ) {
+						child.material = new THREE.MeshLambertMaterial({color: material15.color, transparent: true, opacity: 0.9}); //map: texture2});  //lambert;  // materialsx[5];
+
+						//if ( child instanceof THREE.Mesh ) {
+
+							//child.material.map = texture2;
+
+						//}
+						
+					} );
+				//}, onProgress, onError );
+					objectX.scale.x = 0.99;
+					objectX.scale.y = 0.99;
+					objectX.scale.z = 0.99;	
+					camera.remove( objects[1]);				
+					scene.remove( objects[1]);	
+					objects[1] = objectX.clone();    //clone
+					objects[1].material = objectX.material.clone();
+					
+					object2 = objectX.clone();    //clone
+					
+					object2.material = objectX.material.clone();
+										
+					var angleOb = Math.PI;
+					
+					var sSWi = Math.floor(window.innerWidth/1910)*16;
+					
+					var sSH = window.innerHeight/60;
+					objects[1].scale.x = 0.9;  //reload tetra example
+					objects[1].scale.y = 0.9;
+					objects[1].scale.z = 0.9;	
+					//objects[1].position.x = 0;
+					//objects[1].position.y = 0;
+					//objects[1].position.z = 0;
+					objects[1].position.applyMatrix4( camera.matrixWorld );
+					objects[1].position.x = xxb;//objects[1].position.x ;
+					objects[1].position.z = zzb;//objects[1].position.z -4;
+					objects[1].position.y = yyb;//objects[1].position.y  + window.innerHeight/80;
+					scene.add( objects[1] );
+					camera.add( objects[1]);
+					//camera.position.set(cxb,cyb,czb);
+					console.log( "  numbrx Design " + designs[addTetraFlag] );
+					targetOBJ.push(objects[1]);
+					  	///////////////start of basic geometry (clicked due to solid face and larger size)
+     	
+       
+					var faceColorMaterial = new THREE.MeshLambertMaterial( 
+					{ color: 0xff0000, vertexColors: THREE.FaceColors,shading:THREE.FlatShading,polygonOffset: true,polygonOffsetUnits: 1,polygonOffsetFactor: 1} );
+			//ci += 1;		
+			//if ( ci == 9 ){ci = 1};
+	
+	
+	
+	scene.add(octa);
+	// wireMesh object is added to the original as a sub-object
+	
+	
+	targetList.push(octa);
+	TColour[cii] = ('000000'+material15.color.getHex().toString(16)).slice(-6);
+					
+
+				}, onProgress, onError );  //see line 396  end of addTetraFlag0
+			}
+				
+	
+	
+}
+
+function isOdd(num) { return num % 2;}
+
+			function onWindowResize() {
+
+				windowHalfX = window.innerWidth / 2;
+				windowHalfY = window.innerHeight / 2;
+
+				camera.aspect = window.innerWidth / window.innerHeight;
+				camera.updateProjectionMatrix();
+
+				renderer.setSize( window.innerWidth, window.innerHeight );
+
+			}
+
+			function onDocumentMouseMove( event ) {
+
+				mouse.x = ( event.clientX / window.innerWidth ) * 2 - 1;
+				mouse.y = - ( event.clientY / window.innerHeight ) * 2 + 1;
+				mouseX = mouse.x;
+				mouseY = mouse.y;
+//checkSelection();
+
+			}
+			function onDocumentMouseDown( event ) 
+{
+	// the following line would stop any other event handler from firing
+	// (such as the mouse's TrackballControls)
+	//event.preventDefault();
+	
+	console.log("Click.");
+	
+	// update the mouse variable
+	switch ( event.button ) {
+    case 0: // left 
+        Tadd = 1;
+    case 1: // middle
+        break;
+    case 2: // right
+        Tadd = 0;
+}
+	mouse.x = ( event.clientX / window.innerWidth ) * 2 - 1;
+	mouse.y = - ( event.clientY / window.innerHeight ) * 2 + 1;
+
+	
+	checkSelection();	
+
+}
+function checkSelection(){
+	//rcolor(materials(cii))
+	// find intersections and add a tetra (TDirksevanSchalkwyk)
+	// create a Ray with origin at the mouse position
+	//   and direction into the scene (camera direction)
+  //raycaster.setFromCamera( mouse, camera );
+
+	var vector = new THREE.Vector3( mouse.x, mouse.y, 0.999 );
+	vector.unproject( camera );
+	var ray = new THREE.Raycaster( camera.position, vector.sub( camera.position ).normalize() );
+	//targetList.push(octa);
+   	// create an array containing all objects in the scene with which the ray intersects
+	var intersects = ray.intersectObjects(targetList );
+	//console.log(intersects.name +"---------leftclick");
+	//var intersectsOBJ = ray.intersectObjects(targetOBJ );
+	//console.log(intersectsOBJ + "---------rightclick");
+  	//if an intersection is detected
+	if ( intersects.length > 0 & Tadd == 1)
+	{
+		//controls = new THREE.OrbitControls( camera, renderer.domElement );
+		 console.log("function checkSelection(){" + cii);
+ 
+						
+		  var geometry2 = INTERSECTED.object.geometry;
+		
+          var face = INTERSECTED.face;
+          var xia = face.normal.x;
+          var yia = face.normal.y;
+          var zia = face.normal.z;
+          var vertices = geometry2.vertices;
+
+          //console.log("R" + xia + " : " + yia + " : " + zia);
+          ////console.log("R2" + rotSelect2[1]);
+          ////console.log("vertiALL " , vertices[3]);
+          var v0 = vertices[0]; //vertices[ face.a ];
+          var v1 = vertices[1]; //vertices[ face.b ];
+          var v2 = vertices[2]; //vertices[ face.c ];
+          var v3 = vertices[3];
+          
+          
+          //console.log(vertices[0] + vertices[1] + vertices[2] + vertices[3]);
+         
+          
+          if ( face.a+face.b+face.c == 6 ) {  // ==6 231 320 102 013 correct? added 11 to make not exe....
+			var vv0 = v1;
+            var vv1 = new THREE.Vector3( (v2.x+v3.x)/2+( (v2.x+v3.x)/2-v0.x), 
+                            (v2.y+v3.y)/2+((v2.y+v3.y)/2-v0.y), 
+                            (v2.z+v3.z)/2+((v2.z+v3.z)/2)-v0.z);  
+            var vv2 = v2;
+            var vv3 = v3;
+           console.log("Face 6 @ " + vv3.x);
+          }
+          if ( face.a+face.b+face.c == 5 ) {  // ==5 231 320 102 013
+            var vv0 = new THREE.Vector3( (v3.x+v2.x)/2+( (v3.x+v2.x)/2-v1.x), 
+                            (v3.y+v2.y)/2+((v3.y+v2.y)/2-v1.y), 
+                            (v3.z+v2.z)/2+((v3.z+v2.z)/2)-v1.z);  
+            var vv1 = v0;  
+            var vv2 = v2;
+            var vv3 = v3;
+           console.log("Face 5 @ " + vv0.x + " " + vv1.x);
+          }
+          if ( face.a+face.b+face.c == 4 ) {  // ==4 013 correct
+            var vv0 = v0; 
+            var vv1 = v1;  
+            var vv2 = v3;
+            var vv3 = new THREE.Vector3( (v0.x+v1.x)/2+( (v0.x+v1.x)/2-v2.x), 
+                            (v0.y+v1.y)/2+((v0.y+v1.y)/2-v2.y), 
+                            (v0.z+v1.z)/2+((v0.z+v1.z)/2)-v2.z);
+           console.log("Face 4 @ " + vv0.x);
+          }
+
+          if ( face.a+face.b+face.c == 3 ) {  // ==3 102 
+            var vv0 = v0; 
+            var vv1 = v1;  
+            var vv2 = new THREE.Vector3( (v0.x+v1.x)/2+( (v0.x+v1.x)/2-v3.x), 
+                            (v0.y+v1.y)/2+((v0.y+v1.y)/2-v3.y), 
+                            (v0.z+v1.z)/2+((v0.z+v1.z)/2)-v3.z);
+            var vv3 = v2;
+                            console.log("Face 3 @ " + vv0.x);
+  
+           
+          }
+          
+          sx = v0.x + v1.x + v2.x + v3.x; //selected block centre
+          sy = v0.y + v1.y + v2.y + v3.y;
+          sz = v0.z + v1.z + v2.z + v3.z;
+          
+			xi = (vv0.x + vv1.x + vv2.x + vv3.x)/4;  //new block centre
+			yi = (vv0.y + vv1.y + vv2.y + vv3.y)/4;
+			zi = (vv0.z + vv1.z + vv2.z + vv3.z)/4;
+			//console.log(xi + " : " + yi + " : " + zi );
+			
+       		angleObx = 0;
+			angleOby = 0;
+			angleObz = 0;
+			var angleOb = Math.PI;
+
+			if( (xi)/4 == Math.floor((xi)/4) & (yi-1)/4 == Math.floor((yi-1)/4) & (zi-3)/4 == Math.floor((zi-3)/4) ) { //  & xia == 0 ) {
+                     angleObx = angleOb/2; 
+                      console.log("gggggggggg66666666666666"); }
+		
+			if( (xi+2)/4 == Math.floor((xi+2)/4) & (yi-2)/4 == Math.floor((yi-2)/4) & (zi)/4 == Math.floor((zi)/4) ) { //  & yia == 0  ) {
+                     angleObx = angleOb; 
+                     console.log("gggggggggg4444444444444444"); }
+			
+
+			if( (xi-2)/4 == Math.floor((xi-2)/4) & (yi-3)/4 == Math.floor((yi-3)/4) & (zi-3)/4 == Math.floor((zi-3)/4) ) { //  & yia == 0  ) {
+                     angleObx = angleOb/2;                      
+                     
+                     console.log("ggggggggggg1111111111111111111"); 
+                     }
+
+
+			if( (xi-2)/4 == Math.floor((xi-2)/4) & (yi-1)/4 == Math.floor((yi-1)/4) & (zi-3)/4 == Math.floor((zi-3)/4) ) { //  & zia == 0  ) {
+                     angleObx = angleOb/2; 
+                     angleObz = angleOb/2; 
+                     
+                     console.log("ffffffff888888888888888888"); }
+			
+			if( (xi)/4 == Math.floor((xi)/4) & (yi)/4 == Math.floor((yi)/4) & (zi-2)/4 == Math.floor((zi-2)/4) ) { //  & yia == 0  ) {
+                     angleObz = angleOb; 
+                     
+                     console.log("ffffffff7777777777777777777"); }
+			
+			
+			if( (xi-3)/4 == Math.floor((xi-3)/4) & (yi)/4 == Math.floor((yi)/4) & (zi-3)/4 == Math.floor((zi-3)/4) ) { //  & yia == 0  ) {
+                     angleOby = -angleOb/2; 
+                     
+                     console.log("fffffffffff555555555555555"); }
+			
+			if( (xi-3)/4 == Math.floor((xi-3)/4) & (yi-2)/4 == Math.floor((yi-2)/4) & (zi-1)/4 == Math.floor((zi-1)/4) ) { //  & zia == 0  ) {
+                     angleObx = angleOb/2; 
+                     angleOby = -angleOb/2; 
+                     
+                     console.log("fffffffffff444444444444"); }
+             if( (xi-1)/4 == Math.floor((xi-1)/4) & (yi-2)/4 == Math.floor((yi-2)/4) & (zi-1)/4 == Math.floor((zi-1)/4) ) { //  & yia == 0  ) {
+                     angleOby = -angleOb/2; 
+                     
+                     console.log("ffffffffff666666666666666666"); }        
+             if( (xi-1)/4 == Math.floor((xi-1)/4) & (yi)/4 == Math.floor((yi)/4) & (zi-3)/4 == Math.floor((zi-3)/4) ) { //  & yia == 0  ) {
+                     angleOby = angleOb/2; 
+                     
+                     console.log("ffffffffff666666666666666666"); }
+			
+			if( (xi)/4 == Math.floor((xi)/4) & (yi-3)/4 == Math.floor((yi-3)/4) & (zi-1)/4 == Math.floor((zi-1)/4) ) { //  & zia == 0  ) {
+                     angleObx = angleOb/2; 
+                     angleOby = angleOb; 
+                     
+                     console.log("ffffffff3333333333333"); }
+			
+
+			if( (xi)/4 == Math.floor((xi)/4) & (yi)/4 == Math.floor((yi)/4) & (zi+2)/4 == Math.floor((zi+2)/4) ) { //  & xia == 0 ) {
+                     angleObx = angleOb; }
+                     
+			if( (xi)/4 == Math.floor((xi)/4) & (yi-1)/4 == Math.floor((yi-1)/4) & (zi-1)/4 == Math.floor((zi-1)/4) ) { //  & xia == 0 ) {
+                     angleObx = angleOb/2; 
+
+                     console.log("fff000000000000000000000000"); 
+                     }
+                     
+                     /////////////////////////////////////////////////////////////////////////
+                     if (cii == 1){
+                     var intersect = intersects[ 0 ];
+                     var intersect = intersects[ 1 ];
+
+					// delete cube
+					INTERSECTED.object.geometry.computeBoundingSphere();
+
+					///Now it is possible to get the world position of my boundingSphere, which simultaneously is the world position of my mesh.
+
+var vector22 = INTERSECTED.object.geometry.boundingSphere.center;
+
+						var OXX = INTERSECTED.object.name
+						
+						scene.remove(INTERSECTED.object);
+						scene.remove(objects[INTERSECTED.object.name]);
+						camera.remove(objects[3]);  //text romoval
+					
+					
+					targetList.splice( targetList.indexOf( INTERSECTED.object ), 1 );
+					
+					} 
+				
+console.log(vv0," vvo etc ",vv1,"   vv1",vv2,"   vv2  ",vv3);
+                    
+		cii += 1;
+        addTNew(vv0,vv1,vv2,vv3);
+    }
+    if ( intersects.length > 0 & Tadd == 0)
+{
+	//controls = new THREE.OrbitControls( camera, renderer.domElement );
+		var intersect = intersects[ 0 ];
+
+					// delete cube
+					INTERSECTED.object.geometry.computeBoundingSphere();
+
+					///Now it is possible to get the world position of my boundingSphere, which simultaneously is the world position of my mesh.
+
+var vector22 = INTERSECTED.object.geometry.boundingSphere.center;
+if ((Math.abs(vector22.x)) > 0.8) 
+{
+					console.log(INTERSECTED.object.name + "---A-------delete this" + mirX[5]);
+					if (mirX[INTERSECTED.object.name] == 1)
+					{
+						console.log(INTERSECTED.object.name+"   B  "+vector22.x + "-xxxx---------delete this");
+						var mirrorXX = INTERSECTED.object.name+1000
+						rotXX[mirrorXX-1000] = "NA";
+						scene.remove(objects[mirrorXX]);
+					
+					} 
+				
+}
+if ((Math.abs(vector22.y)) > 0.2) 
+{
+					if (mirY[INTERSECTED.object.name] == 1)
+					{
+						console.log(INTERSECTED.object.name+"   B  "+vector22.x + "-xxxxSS---------delete this");
+						var mirrorYY = INTERSECTED.object.name+2000
+						rotYY[mirrorYY-2000] = "NA";
+						scene.remove(objects[mirrorYY]);
+					
+					} 
+				
+}
+if ((Math.abs(vector22.y)) > 0.2 & (Math.abs(vector22.x) > 0.8)) 
+{
+					if (mirY[INTERSECTED.object.name] == 1 & mirX[INTERSECTED.object.name] == 1)
+					{
+						console.log(INTERSECTED.object.name+"   B  "+vector22.x + "-xxxxSS---------delete this");
+						var mirrorXY = INTERSECTED.object.name+3000
+						rotXY[mirrorXY-3000] = "NA";
+						scene.remove(objects[mirrorXY]);
+					
+					} 
+				
+}
+					rotX[INTERSECTED.object.name] = "NA";
+					scene.remove(objects[INTERSECTED.object.name]);
+					//scene.remove(INTERSECTED.object);
+					
+					targetList.splice( targetList.indexOf( INTERSECTED.object ), 1 );
+					console.log(INTERSECTED.object.name+"     "+vector22.x + "-xxxx-----G----delete this");
+					
+					//////////////////////////////		/////////////////end of x sym remove
+					//animate();	
+				
+										
+}
+}
+
+function     addTNew(vv0,vv1,vv2,vv3){
+					materials[cii] = material15;
+					//objects[cii] = new THREE.Mesh( object2, new THREE.MeshLambertMaterial({color: materials[cii].color, map: texture2}));
+					objects[cii] = object2.clone();   //clone
+					objects[cii].material = object2.material.clone();
+				if(Rainbow == "Random"){
+					var tempColor = ('000000'+materials[cii].color.getHex().toString(16)).slice(-6)
+					var nextColor = Math.floor((Math.random()*98.9+1)) +100*Math.floor((Math.random()*98.9+1))+10000*Math.floor((Math.random()*98.9+1));
+					console.log("nextcolour " + nextColor);
+					materials[cii].color.setHex( "0x"+nextColor);
+				}
+				if(Rainbow == "Greys"){
+					//var tempColor = ('000000'+materials[cii].color.getHex().toString(16)).slice(-6)
+					var shade = Math.floor(Math.random()*80+17);
+					var shadeG = shade.toString(16);
+					
+					materials[cii].color.setHex( "0x"+shadeG+shadeG+shadeG);
+				}
+				if(Rainbow == "Greens"){
+					//var tempColor = ('000000'+materials[cii].color.getHex().toString(16)).slice(-6)
+					var shade = Math.floor(Math.random()*80+17);
+					var shadeG = shade.toString(16);
+					var nextColor = "ff";
+					materials[cii].color.setHex( "0x"+shadeG+nextColor+shadeG);
+				}
+				if(Rainbow == "Reds"){
+					var shade = Math.floor(Math.random()*80+17);
+					var shadeG = shade.toString(16);
+					var nextColor = "ff";
+					materials[cii].color.setHex( "0x"+nextColor+shadeG+shadeG);
+					//console.log("0x"+nextColor+shadeG+shadeG);
+				}
+				if(Rainbow == "Blues"){
+					var shade = Math.floor(Math.random()*80+17);
+					var shadeG = shade.toString(16);
+					var nextColor = "ff";
+					materials[cii].color.setHex( "0x"+shadeG+shadeG+nextColor);
+					//var nextColor = (Math.floor((Math.random()*254.9+1))+65536).toString(16); //Math.floor(Math.random()*16777215).toString(16);
+					//materials[cii].color.setHex( "0x"+nextColor);
+				}
+				if(Rainbow == "Yellow/Blue"){
+					materials[cii].color.setHex(colcol);
+					if(colcol  == "0x2222cc"){ //'000000'+color.getHex().toString(16)).slice(-6) 
+						colcol = "0x555500"}
+						else{colcol = "0x2222cc"}
+				
+					materials[cii].color.setHex( colcol); //0x4444ff blue 0xee4444 pink 0xeeee00 yellow
+				}
+				
+			
+					//if(TransparentBlock = "False"){
+						lambert = new THREE.MeshLambertMaterial({color: materials[cii].color, map: texture2}); //, transparent: true, opacity: 0.5});
+					//}
+					//if(TransparentBlock = "True"){
+						//lambert = new THREE.MeshLambertMaterial({color: materials[cii].color, map: texture2, transparent: false, opacity: 0.6,depthWrite: false});
+					//}
+					//var pos= Math.floor((Math.random() * materials[cii].length));
+					//materials[cii].material.color.setHex( 0x0000ff );
+					//objects[cii].material = lambert;
+					objects[cii].traverse( function ( child ) {
+						child.material = lambert;						
+					} );
+
+                    if(loadingF == 1){
+                        xi = retrievedObjectA[0].possiX[cii]; 
+					    yi = retrievedObjectA[0].possiY[cii];
+					    zi = retrievedObjectA[0].possiZ[cii];
+						angleObx = retrievedObjectA[0].rotX[cii];
+						angleOby = retrievedObjectA[0].rotY[cii];
+						angleObz = retrievedObjectA[0].rotZ[cii];
+                        loadingF = 0;
+						
+                    }
+					
+					objects[cii].position.y =  yi;
+					objects[cii].position.z =  zi;
+					objects[cii].position.x =  xi;
+					possiX[cii] = xi; 
+					possiY[cii] = yi;
+					possiZ[cii] = zi;
+					TFlagNum[cii] = addTetraFlag;
+
+                    
+					
+					
+					objects[cii].rotation.x = angleObx;
+					objects[cii].rotation.y = angleOby;
+					objects[cii].rotation.z = angleObz;
+					rotX[cii] = angleObx; 
+					rotY[cii] = angleOby;
+					rotZ[cii] = angleObz;
+					
+					//DesT = 
+					//lambert = new THREE.MeshLambertMaterial({color: 0x0011ff, map: texture2});
+					//console.log(cii + "------------cii");
+					//lambert = materials[cii]; 
+					//objects[cii].traverse( function ( child ) {
+						//child.material = material14;	
+						//console.log(cii + "child------------cii");
+					//});
+					//objects[cii].material = materials[cii];	
+					
+					scene2.add( objects[cii] );
+					scene.add( objects[cii] );
+					if(mirX[cii] == 1){Xsym = "ON";}
+					if (Xsym == "ON"){
+						console.log( "YayMirX!");
+						mirX[cii] = 1;
+						}
+                    if(mirY[cii] == 1){Ysym = "ON";}
+					if (Ysym == "ON"){mirY[cii] = 1;}
+                    if(mirXY[cii] == 1){Xsym = "ON";
+                                        Ysym = "ON";}
+					if (Ysym == "ON" & Xsym == "ON"){mirXY[cii] = 1;}
+					//objects[cii].name = "NONO";
+                    objects[cii].userData = "P";
+					objects[cii].userSTL = "Y";
+					objects[cii].userCol = TColour[cii];
+					console.log( cii + "numbr" +  objects[cii].nameX + "Yay");
+					console.log( cii + "numbr" +  objects[cii].name + "Nay");
+					targetOBJ.push(objects[cii].name);
+					TColour[cii] = ('000000'+material15.color.getHex().toString(16)).slice(-6);
+					console.log(Xsym);
+					
+					/////////////////////////////////////////////////////////XXXXXSymetry
+					if (Math.abs(xi)>0.8 & Xsym == "ON") 
+					{
+					//ciiX = ciiX +1;
+					objects[cii+1000] = object2.clone();   //clone object in array +1000, but save variables in possiX Xsym[cii] !!! etc
+					objects[cii+1000].material = object2.material.clone();
+					lambert = new THREE.MeshLambertMaterial({color: materials[cii].color, map: texture2});
+						objects[cii+1000].traverse( function ( child ) {
+						child.material = lambert;						
+					} );
+					
+					objects[cii+1000].position.y =  yi;
+					objects[cii+1000].position.z =  zi;
+					objects[cii+1000].position.x =  -xi;
+					
+					
+					objects[cii+1000].rotation.x = angleObx;
+					objects[cii+1000].rotation.y = -angleOby;
+					objects[cii+1000].rotation.z = angleObz;
+					possiYX[cii] = yi;
+					possiZX[cii] = zi;
+					possiXX[cii] = -xi;
+					TFlagNumX[cii] = addTetraFlag;
+					TColourX[cii] = ('000000'+lambert.color.getHex().toString(16)).slice(-6);
+					rotXX[cii] = angleObx; 
+					rotYX[cii] = -angleOby;
+					rotZX[cii] = angleObz;
+					
+					
+					scene2.add(objects[cii+1000]);
+					scene.add( objects[cii+1000] );
+					objects[cii+1000].name = cii+1000;
+                    objects[cii+1000].userData = "P";
+					console.log( cii + "numbr" +  objects[cii+1000].name);
+					
+					//console.log( cii + "numbr" );
+					targetOBJ.push(objects[cii+1000]); ///////////////////////////xxxxxxxxxxxSymetry END
+				}
+								else {
+					possiYX[cii] = "NA";
+					possiZX[cii] = "NA";
+					possiXX[cii] = "NA";
+					TFlagNumX[cii] = "NA";
+					TColourX[cii] = "NA";
+					rotXX[cii] = "NA"; 
+					rotYX[cii] = "NA";
+					rotZX[cii] = "NA";
+					//objects[cii+1000].name = "NA";
+				}
+				
+					/////////////////////////////////////////////////////////YYYYYYYYYSymetry
+					if (Math.abs(yi)>0.8 & Ysym == "ON") 
+					{
+						//ciiY = ciiY +1;
+					objects[cii+2000] = object2.clone();   //clone
+					objects[cii+2000].material = object2.material.clone();
+					lambert = new THREE.MeshLambertMaterial({color: materials[cii].color, map: texture2});
+					
+					objects[cii+2000].traverse( function ( child ) {
+						child.material = lambert;						
+					} );
+					
+					objects[cii+2000].position.y =  -yi;
+					objects[cii+2000].position.z =  zi;
+					objects[cii+2000].position.x =  xi;
+					
+					
+					objects[cii+2000].rotation.x = -angleObx;
+					objects[cii+2000].rotation.y = angleOby;
+					objects[cii+2000].rotation.z = angleObz;
+					possiYY[cii] = -yi;
+					possiZY[cii] = zi;
+					possiXY[cii] = xi;
+					TFlagNumY[cii] = addTetraFlag;
+					TColourY[cii] = ('000000'+lambert.color.getHex().toString(16)).slice(-6);
+					rotXY[cii] = -angleObx; 
+					rotYY[cii] = angleOby;
+					rotZY[cii] = angleObz;
+					
+					
+					scene2.add(objects[cii+2000]);
+					scene.add( objects[cii+2000] );
+					objects[cii+2000].name = cii+2000;
+                    objects[cii+2000].userData = "P";
+					console.log( cii + "numbr" +  objects[cii+2000].name);
+					
+					//console.log( cii + "numbr" );
+					targetOBJ.push(objects[cii+2000]); ///////////////////////////YYYYYYYYYYYYYYSymetry END
+					
+	
+				}
+
+				else {
+					possiYY[cii] = "NA";
+					possiZY[cii] = "NA";
+					possiXY[cii] = "NA";
+					TFlagNumY[cii] = "NA";
+					TColourY[cii] = "NA";
+					rotXY[cii] = "NA"; 
+					rotYY[cii] = "NA";
+					rotZY[cii] = "NA";
+					//objects[cii+2000].name = "NA";
+				}
+				/////////////////////////////////////////////////////////XXXXXXXXXXXXYYYYYYYYYSymetry
+					if (Math.abs(yi)>0.8 &  Math.abs(xi) > 0.8 & Xsym =="ON" & Ysym == "ON") 
+					{
+						//ciiXY = ciiXY +1;
+					objects[cii+3000] = object2.clone();   //clone
+					objects[cii+3000].material = object2.material.clone();
+					lambert = new THREE.MeshLambertMaterial({color: materials[cii].color, map: texture2});
+					
+					objects[cii+3000].traverse( function ( child ) {
+						child.material = lambert;						
+					} );
+					
+					objects[cii+3000].position.y =  -yi;
+					objects[cii+3000].position.z =  zi;
+					objects[cii+3000].position.x =  -xi;
+					
+					
+					objects[cii+3000].rotation.x = -angleObx;
+					objects[cii+3000].rotation.y = -angleOby;
+					objects[cii+3000].rotation.z = angleObz;
+					possiYXY[cii] = -yi;
+					possiZXY[cii] = zi;
+					possiXXY[cii] = -xi;
+					TFlagNumXY[cii] = addTetraFlag;
+					TColourXY[cii] = ('000000'+lambert.color.getHex().toString(16)).slice(-6);
+					rotXXY[cii] = -angleObx; 
+					rotYXY[cii] = -angleOby;
+					rotZXY[cii] = angleObz;
+					
+					
+					scene2.add(objects[cii+3000]);
+					scene.add( objects[cii+3000] );
+					objects[cii+3000].name = cii+3000;
+                    objects[cii+3000].userData = "P";
+					console.log( cii + "numbr" +  objects[cii+3000].name);
+					
+					//console.log( cii + "numbr" );
+					targetOBJ.push(objects[cii+3000]); ///////////////////////////XXXXXXXXXXXxYYYYYYYYYYYYYYSymetry END
+				}
+				else {
+					possiYXY[cii] = "NA";
+					possiZXY[cii] = "NA";
+					possiXXY[cii] = "NA";
+					TFlagNumXY[cii] = "NA";
+					TColourXY[cii] = "NA";
+					rotXXY[cii] = "NA"; 
+					rotYXY[cii] = "NA";
+					rotZXY[cii] = "NA";
+					//objects[cii+3000].name = "NA";
+				}
+									
+					 
+     	///////////////start of basic geometry (clicked due to solid face and larger size)
+     	console.log( cii + "numbr and xvalue =" + xi );
+        var TetraGeom = new THREE.Geometry();
+var ysum = vv0.y+vv1.y+vv2.y+vv3.y;
+var xsum = vv0.x+vv1.x+vv2.x+vv3.x;
+vv0x[cii] = vv0.x; 
+console.log( cii + "vv0x =" + vv0.x );
+vv0y[cii] = vv0.y; 
+vv0z[cii] = vv0.z; 
+vv1x[cii] = vv1.x; 
+vv1y[cii] = vv1.y; 
+vv1z[cii] = vv1.z;
+vv2x[cii] = vv2.x; 
+vv2y[cii] = vv2.y; 
+vv2z[cii] = vv2.z;
+vv3x[cii] = vv3.x; 
+vv3y[cii] = vv3.y; 
+vv3z[cii] = vv3.z;
+TetraGeom.vertices = [  // array of Vector3 giving vertex coordinates
+        new THREE.Vector3( vv0.x,vv0.y,vv0.z),    // vertex number 0
+        new THREE.Vector3( vv1.x,vv1.y,vv1.z ),   // vertex number 1
+        new THREE.Vector3( vv2.x,vv2.y,vv2.z ),  // vertex number 2        
+        new THREE.Vector3( vv3.x,vv3.y,vv3.z)   // vertex number 3
+        ];
+
+	
+TetraGeom.faces = [  // array of Face3 giving the triangular faces
+        new THREE.Face3( 2, 1, 0 ),  //  bottom face
+        new THREE.Face3( 1, 2, 3 ),   // side face
+        new THREE.Face3( 0, 3, 2 ),  // remaining faces sides
+        new THREE.Face3( 3, 0, 1 )
+        ];
+	
+	    /*     if (Ysym =="ON")
+	         {
+	         if (ysum > 0.1)  {
+TetraGeom.faces = [  // array of Face3 giving the triangular faces
+        new THREE.Face3( 0, 1, 2 ),  //  bottom face
+        new THREE.Face3( 3, 2, 1 ),   // side face
+        new THREE.Face3( 2, 3, 0 ),  // remaining faces sides
+        new THREE.Face3( 1, 0, 3 )
+        ];}
+   
+		}
+			
+			 if (Xsym =="ON")
+	         {
+     
+          if (xsum > 0.1)  {
+TetraGeom.faces = [  // array of Face3 giving the triangular faces
+        new THREE.Face3( 0, 1, 2 ),  //  bottom face
+        new THREE.Face3( 3, 2, 1 ),   // side face
+        new THREE.Face3( 2, 3, 0 ),  // remaining faces sides
+        new THREE.Face3( 1, 0, 3 )
+        ];}
+    		}*/
+    		  
+  
+ TetraGeom.computeFaceNormals();
+  //TetraGeom.computeVertexNormals();    // requires correct face normals
+  octa= new THREE.Mesh( TetraGeom, material11 ); 
+  console.log(cii + "octa------------cii");
+	// creates a wireMesh object
+	//var wireOcta = new THREE.Mesh(TetraGeom, new THREE.MeshBasicMaterial({ color: 0x116611, wireframe: true }));
+	//octa.add(wireOcta );
+	octa.name = cii;
+	scene.add(octa);
+	// wireMesh object is added to the original as a sub-object
+	
+	targetList.push(octa);   //  end of tetra 1, 
+	//if(cii == 10){exportToObj();}
+	
+	
+	/////////////////////////////////////////////////////////XXXXXSymmetry octa
+					if (Math.abs(xi)>0.8 & Xsym == "ON") 
+					{
+					var TetraGeom = new THREE.Geometry();
+var xsum = vv0.x+vv1.x+vv2.x+vv3.x;
+
+        TetraGeom.vertices = [  // array of Vector3 giving vertex coordinates
+        new THREE.Vector3( -vv0.x,vv0.y,vv0.z),    // vertex number 0
+        new THREE.Vector3( -vv1.x,vv1.y,vv1.z ),   // vertex number 1
+        new THREE.Vector3( -vv2.x,vv2.y,vv2.z ),  // vertex number 2        
+        new THREE.Vector3( -vv3.x,vv3.y,vv3.z)   // vertex number 3
+        ];
+
+TetraGeom.faces = [  // array of Face3 giving the triangular faces
+        new THREE.Face3( 0, 1, 2 ),  //  bottom face
+        new THREE.Face3( 3, 2, 1 ),   // side face
+        new THREE.Face3( 2, 3, 0 ),  // remaining faces sides
+        new THREE.Face3( 1, 0, 3 )
+        ];
+        
+
+  //TetraGeom.computeFaceNormals();
+  
+  octaX= new THREE.Mesh( TetraGeom, material11 );
+ 	octaX.name = cii+1000;
+					
+	scene.add(octaX);
+		
+	targetList.push(octaX);		   //end of octa x//////////////////////////xxxxxxxxxxxSymetry END
+				}
+	/////////////////////////////////////////////////////////YYYYYYYYYSymmetry   octa
+					if (Math.abs(yi)>0.8 & Ysym == "ON") 
+					{
+						var TetraGeom = new THREE.Geometry();
+var ysum = vv0.y+vv1.y+vv2.y+vv3.y;
+
+        TetraGeom.vertices = [  // array of Vector3 giving vertex coordinates
+        new THREE.Vector3( vv0.x,-vv0.y,vv0.z),    // vertex number 0
+        new THREE.Vector3( vv1.x,-vv1.y,vv1.z ),   // vertex number 1
+        new THREE.Vector3( vv2.x,-vv2.y,vv2.z ),  // vertex number 2        
+        new THREE.Vector3( vv3.x,-vv3.y,vv3.z)   // vertex number 3
+        ];
+         
+TetraGeom.faces = [  // array of Face3 giving the triangular faces
+        new THREE.Face3( 0, 1, 2 ),  //  bottom face
+        new THREE.Face3( 3, 2, 1 ),   // side face
+        new THREE.Face3( 2, 3, 0 ),  // remaining faces sides
+        new THREE.Face3( 1, 0, 3 )
+        ];
+        
+        
+
+  //TetraGeom.computeFaceNormals();
+  //TetraGeom.computeVertexNormals();    // requires correct face normals
+  octaY= new THREE.Mesh( TetraGeom, material11 );
+ 	octaY.name = cii+2000;
+					//octaY.position.y =  -yi;
+					//octaY.position.z =  zi;
+					//octaY.position.x =  xi;
+					
+					
+					//octaY.rotation.x = -angleObx;
+					//octaY.rotation.y = angleOby;
+					//octaY.rotation.z = angleObz;
+	// creates a wireMesh object
+	//var wireOcta = new THREE.Mesh(TetraGeom, new THREE.MeshBasicMaterial({ color: 0x116611, wireframe: true, transparent: true, opacity: 0.5 }));
+	//octaY.add(wireOcta );
+	scene.add(octaY);
+	// wireMesh object is added to the original as a sub-object
+	
+	
+	targetList.push(octaY);		   //  end of octa y,  ///////////////////////////YYYYYYYYYYYYYYSymetry END
+				}
+				
+				 if (Xsym =="ON" & Ysym =="ON")
+	         {
+				 var TetraGeom = new THREE.Geometry();
+var ysum = vv0.y+vv1.y+vv2.y+vv3.y;
+var xsum = vv0.x+vv1.x+vv2.x+vv3.x;
+
+        TetraGeom.vertices = [  // array of Vector3 giving vertex coordinates
+        new THREE.Vector3( -vv0.x,-vv0.y,vv0.z),    // vertex number 0
+        new THREE.Vector3( -vv1.x,-vv1.y,vv1.z ),   // vertex number 1
+        new THREE.Vector3( -vv2.x,-vv2.y,vv2.z ),  // vertex number 2        
+        new THREE.Vector3( -vv3.x,-vv3.y,vv3.z)   // vertex number 3
+        ];
+     
+         /* if (Math.abs(xsum) > 0.1 & Math.abs(ysum) > 0.1)  {*/
+TetraGeom.faces = [  // array of Face3 giving the triangular faces
+        new THREE.Face3( 2, 1, 0 ),  //  bottom face
+        new THREE.Face3( 1, 2, 3 ),   // side face
+        new THREE.Face3( 0, 3, 2 ),  // remaining faces sides
+        new THREE.Face3( 3, 0, 1 )
+        ];
+         if (xsum > 0.1 & ysum < -0.1)  {
+TetraGeom.faces = [  // array of Face3 giving the triangular faces
+        new THREE.Face3( 0, 1, 2 ),  //  bottom face
+        new THREE.Face3( 3, 2, 1 ),   // side face
+        new THREE.Face3( 2, 3, 0 ),  // remaining faces sides
+        new THREE.Face3( 1, 0, 3 )
+        ];}
+         if (xsum < -0.1 & ysum > 0.1)  {
+TetraGeom.faces = [  // array of Face3 giving the triangular faces
+        new THREE.Face3( 0, 1, 2 ),  //  bottom face
+        new THREE.Face3( 3, 2, 1 ),   // side face
+        new THREE.Face3( 2, 3, 0 ),  // remaining faces sides
+        new THREE.Face3( 1, 0, 3 )
+        ];}
+        if (xsum < -0.1 & ysum < -0.1)  {
+TetraGeom.faces = [  // array of Face3 giving the triangular faces
+        new THREE.Face3( 2, 1, 0 ),  //  bottom face
+        new THREE.Face3( 1, 2, 3 ),   // side face
+        new THREE.Face3( 0, 3, 2 ),  // remaining faces sides
+        new THREE.Face3( 3, 0, 1 )
+        ];}
+        TetraGeom.computeFaceNormals();
+    octaXY= new THREE.Mesh( TetraGeom, material11 );
+ 	octaXY.name = cii+3000;
+			
+	scene.add(octaXY);
+	// wireMesh object is added to the original as a sub-object
+	
+	
+	targetList.push(octaXY);		   //  end of octa xy,  ///////////////////////////YYYYYYYYYYYYYYSymetry END
+    		}
+
+					
+       
+
+}
+
+
+
+
+function onDocumentKeyDown( event ) {
+	
+				
+
+				switch( event.keyCode ) {
+
+					case 16: isShiftDown = true; break;
+				
+
+				}
+
+			}
+
+			function onDocumentKeyUp( event ) {
+
+				switch ( event.keyCode ) {
+
+					case 16: isShiftDown = false; break;
+
+				}
+
+			}
+
+
+			//
+
+	function animate() 
+{
+    
+    requestAnimationFrame( animate );
+   
+	render();		
+	update();
+	 
+}
+
+function flyTrack() {
+
+    var prevCamera = camera;
+    var SCREEN_WIDTH = window.innerWidth, SCREEN_HEIGHT = window.innerHeight;
+	  var VIEW_ANGLE = 45, ASPECT = SCREEN_WIDTH / SCREEN_HEIGHT, NEAR = 0.01, FAR = 20000;
+		camera = new THREE.PerspectiveCamera( VIEW_ANGLE, ASPECT, NEAR, FAR);
+    camera.position.copy( prevCamera.position );
+    camera.rotation.copy( prevCamera.rotation );
+
+    var MODE = { TRACKBALL: 0, FLY: 1 };
+
+    switch( mode ) {
+
+        case MODE.FLY:
+
+            controls = new THREE.TrackballControls( camera );
+
+            mode = MODE.TRACKBALL;
+
+            break;
+
+        case MODE.TRACKBALL:
+
+            controls = new THREE.FlyControls( camera );
+
+            mode = MODE.FLY;
+
+            break;
+
+    }
+
+}
+
+function update()
+{
+	keyboard.update();
+	var angleOb = Math.PI;
+	//if ( keyboard.pressed("S") ) {
+					//exportToObj();
+					//console.log("PPressed");
+				//}
+			//	if ( keyboard.pressed("C") ) {
+			//		flyTrack();
+					
+			//	}
+
+					
+				
+	if ( keyboard.pressed("A") ) {
+					objects[1].traverse( function ( child ) {
+						child.material = lambert;						
+					} );
+					objects[cii].traverse( function ( child ) {
+						child.material = lambert;						
+					} );
+					console.log("APressed");
+					
+				}
+	 
+				
+	if ( keyboard.pressed("left") ) {
+					objects[1].position.x = objects[1].position.x - 0.5;
+					//objects[3].position.x = objects[1].position.x - 0.5;
+					objects[999].position.x = objects[999].position.x - 0.5;
+					console.log("leftPressed");
+					
+				}
+
+					if ( keyboard.pressed("right") ) {
+					objects[1].position.x = objects[1].position.x + 0.5;
+					//objects[3].position.x = objects[1].position.x + 0.5;
+					objects[999].position.x = objects[999].position.x + 0.5;
+					console.log("rightPressed");
+					
+				}
+				
+	if ( keyboard.pressed("down") ) {
+					objects[1].position.y = objects[1].position.y - 0.5;
+					//objects[3].position.y = objects[1].position.y - 0.5;
+					objects[999].position.y = objects[999].position.y - 0.5;
+					console.log("downPressed");
+					
+					}
+						if ( keyboard.pressed("up") ) {
+					objects[1].position.y = objects[1].position.y + 0.5;
+					//objects[3].position.y = objects[1].position.y + 0.5;
+					objects[999].position.y = objects[999].position.y + 0.5;
+					console.log("upPressed");
+					
+				}
+	var callback = function() {
+		
+   objects[cii].rotation.x = gamma  + angleOb/2;
+   objects[cii+1000].rotation.x = gammax  + angleOb/2;
+   objects[cii+2000].rotation.x = gammay  - angleOb/2;
+   objects[cii+3000].rotation.x = gammaz  - angleOb/2;
+   //setTimeout(objects[cii].rotation.x = gamma + angleOb/2;
+  }
+  
+  
+  var callbacky = function() {
+   objects[cii].rotation.y = gamma + angleOb/2;
+   objects[cii+1000].rotation.y = gammax  - angleOb/2;
+   objects[cii+2000].rotation.y = gammay  + angleOb/2;
+   objects[cii+3000].rotation.y = gammaz  - angleOb/2;
+  }
+   var callbackz = function() {
+			objects[cii].rotation.z = gamma + angleOb/2;
+			objects[cii+1000].rotation.z = gammax  - angleOb/2;
+			objects[cii+2000].rotation.z = gammay  + angleOb/2;
+   objects[cii+3000].rotation.z = gammaz  - angleOb/2;			
+  }
+  var callbacki = function() {
+	//objects[cii].material.transparent = true;
+	objects[cii].material.opacity = 0.6;
+	console.log("transparent2")			
+  }
+  /* if ( keyboard.pressed("I") ) {
+			console.log("transparent1");
+			setTimeout(callbacki, 300);
+		}	
+		*/
+ 
+  if ( keyboard.pressed("X") ) {
+		var gamma = objects[cii].rotation.x
+		var gammax = objects[cii+1000].rotation.x
+		var gammay = objects[cii+2000].rotation.x
+		var gammaz = objects[cii+3000].rotation.x
+		console.log("upPressed");
+			setTimeout(callback, 300);
+			//setTimeout(callback, 300);
+			//setTimeout(callback, 400);
+			//setTimeout(callback, 500);
+			//setTimeout(callback, 600);
+			//setTimeout(callback, 700);
+					
+				}
+	if ( keyboard.pressed("Y") ) {
+		var gamma = objects[cii].rotation.y
+		var gammax = objects[cii+1000].rotation.y
+		var gammay = objects[cii+2000].rotation.y
+		var gammaz = objects[cii+3000].rotation.y
+			//objects[cii].rotation.x = gamma + angleOb/4;
+			setTimeout(callbacky, 300);
+					
+					
+				}
+	if ( keyboard.pressed("Z") ) {
+		var gamma = objects[cii].rotation.z
+		var gammax = objects[cii+1000].rotation.z
+		var gammay = objects[cii+2000].rotation.z
+		var gammaz = objects[cii+3000].rotation.z
+			//objects[cii].rotation.x = gamma + angleOb/4;
+			setTimeout(callbackz, 300);
+			//setTimeout(callbackz, 350);
+			//setTimeout(callbackz, 400);
+			//setTimeout(callbackz, 450);
+					
+					
+				}
+	if ( keyboard.pressed("F") ) {
+		//console.log("eeeeeeeeeeeeeeeee"); 
+		//setTimeout(2000,console.log("fffffFPressed"));
+		for ( var gamma = 0; gamma <= 10; gamma += 1 ) {
+			var xxxx = gamma;
+			
+		}
+		
+		//if(keyCodeUp == true){
+			//console.log("ggggggggggggggg"); 
+		addTetraFlag = addTetraFlag +1 + xxxx;
+		addTetraFlag = addTetraFlag - xxxx;
+		//scene.remove(objects[1]);
+		camera.remove(objects[1]);
+		
+		//targetList.splice( targetList.indexOf( objects[1] ), 1 );
+			addTetraF();
+			//}
+			}
+
+
+   
+   if ( keyboard.pressed("B") ) {
+    separation += 0.1;
+}
+       if ( keyboard.pressed("B") ) {
+    separation -= 0.1;
+}
+    
+	
+	
+	objects[1].rotation.z  =   objects[1].rotation.z + 0.01;
+	objects[1].rotation.x  =   objects[1].rotation.x + 0.005;
+	if (objects[1].rotation.x > Math.PI*2){objects[1].rotation.x = 0.005};
+	if (objects[1].rotation.z > Math.PI*2){objects[1].rotation.z = 0.01};
+	//objects[1].geometry.colorsNeedUpdate = true;
+	objects[1].traverse( function ( child ) {
+						child.material = lambert;						
+					} );
+	controls.update();
+	//controls = new THREE.OrbitControls( camera, renderer.domElement );
+		//controls = new THREE.OrthographicTrackballControls( camera, renderer.domElement );
+	//controls1.update();
+	 
+	checkHighlight();
+	CheckMouseSphere();
+	
+	//controls.update();
+	//controls = new THREE.OrbitControls( camera, renderer.domElement );
+		//controls = new THREE.OrthographicTrackballControls( camera, renderer.domElement );
+	//checkHighlight();
+	//CheckMouseSphere();
+	//controls.update();
+	//objects[1].material = lambert; 
+	//objects[1].geometry.colorsNeedUpdate = true;
+	
+		///exportToObj();
+		//console.log("p");
+	//}
+	//ColorSelected();
+	//intersects[ 0 ].object.geometry.colorsNeedUpdate = true;
+	//controls.update();
+	//exportButton = document.getElementById( 'export' );
+		//		exportButton.addEventListener( 'click', function() { exportToObj(); });
+
+}  //End of function update
+function checkHighlight(){
+	// find intersections
+	// create a Ray with origin at the mouse position
+	//   and direction into the scene (camera direction)
+	var vector = new THREE.Vector3( mouse.x, mouse.y, 0.999 );
+	vector.unproject( camera );
+	var ray = new THREE.Raycaster( camera.position, vector.sub( camera.position ).normalize() );
+
+	// create an array containing all objects in the scene with which the ray intersects
+	var intersects = ray.intersectObjects( targetList );
+
+	// INTERSECTED = the object in the scene currently closest to the camera 
+	//		and intersected by the Ray projected from the mouse position 	
+	
+	// if there is one (or more) intersections
+	if ( intersects.length > 0 )
+	{	// case if mouse is not currently over an object
+		if(INTERSECTED==null){
+			INTERSECTED = intersects[ 0 ];
+			INTERSECTED.face.color = cubeColor; //highlightedColor;
+		}
+		else{	// if thse mouse is over an object
+			INTERSECTED.face.color= baseColor;
+			INTERSECTED.object.geometry.colorsNeedUpdate=true;
+			INTERSECTED = intersects[ 0 ];
+			INTERSECTED.face.color = cubeColor; //highlightedColor;	
+      ////console.log("FaceColor @ " + INTERSECTED.face.color );
+		}
+		// upsdate mouseSphere coordinates and update colors
+		mouseSphereCoords = [INTERSECTED.point.x,INTERSECTED.point.y,INTERSECTED.point.z];
+		INTERSECTED.object.geometry.colorsNeedUpdate=true;
+		
+	} 
+	else // there are no intersections
+	{
+		// restore previous intersection object (if it exists) to its original color
+		if ( INTERSECTED ){
+			INTERSECTED.face.color = baseColor;
+			INTERSECTED.object.geometry.colorsNeedUpdate=true;
+		}
+		// remove previous intersection object reference
+		//     by setting current intersection object to "nothing"
+		
+		INTERSECTED = null;
+		mouseSphereCoords = null;
+		
+		
+	}
+}
+
+function checkRotation(){
+
+  var xR = camera.position.x,
+    yR = camera.position.y,
+    zR = camera.position.z;
+
+  if (keyboard.pressed("left")){
+    camera.position.x = xR * Math.cos(rotSpeed) + zR * Math.sin(rotSpeed);
+    camera.position.z = zR * Math.cos(rotSpeed) - xR * Math.sin(rotSpeed);
+  } else if (keyboard.pressed("right")){
+    camera.position.x = xR * Math.cos(rotSpeed) - zR * Math.sin(rotSpeed);
+    camera.position.z = zR * Math.cos(rotSpeed) + xR * Math.sin(rotSpeed);
+  }
+
+  camera.lookAt(scene.position);
+
+}
+
+function CheckMouseSphere(){
+	// if the coordinates exist, make the sphere visible
+	if(mouseSphereCoords != null){
+		////console.log(mouseSphereCoords[0].toString()+","+mouseSphereCoords[1].toString()+","+mouseSphereCoords[2].toString());
+		//controls = new THREE.OrbitControls( camera, renderer.domElement );
+		mouseSphere[0].position.set(mouseSphereCoords[0],mouseSphereCoords[1],mouseSphereCoords[2]);
+		mouseSphere[0].visible = true;
+		//controls = new THREE.OrbitControls( camera, renderer.domElement );
+		//controls = new THREE.OrthographicTrackballControls( camera, renderer.domElement );
+	}
+	else{ // otherwise hide the sphere
+		mouseSphere[0].visible = false;
+		//controls = new THREE.OrthographicTrackballControls( camera, renderer.domElement );
+		//controls = new THREE.OrbitControls( camera, renderer.domElement );
+	}
+
+}
+function render() 
+{
+	var timer1 = Date.now()/300000;
+	var timer = (timer1 - Math.floor(timer1,0))*360;
+	//console.log(timer);
+	//particleLight.position.z = Math.cos( timer * 3 ) * 1100;
+	keyboard.update();
+	var angleOb = Math.PI;
+	
+	var xR = lightsP[ 1 ].position.x,
+		yR = lightsP[ 1 ].position.y,
+		zR = lightsP[ 1 ].position.z;
+		lightsP[ 1 ].position.x = xR * Math.cos(timer/angleOb/3000) + zR * Math.sin(timer/angleOb/3000);
+		lightsP[ 1 ].position.z = zR * Math.cos(timer/angleOb/3000) - xR * Math.sin(timer/angleOb/3000);
+		lightsP[ 2 ].position.x = -lightsP[ 1 ].position.x
+		lightsP[ 2 ].position.z = -lightsP[ 1 ].position.z
+		
+
+	if ( keyboard.pressed("C") ) {		//circle the design	
+		iR = 0;}
+		if (iR <360){
+		var xR = camera.position.x,
+		yR = camera.position.y,
+		zR = camera.position.z;
+		console.log(iR);
+		
+		camera.position.x = xR * Math.cos(iR/angleOb/3270) + zR * Math.sin(iR/angleOb/3270);
+		camera.position.z = zR * Math.cos(iR/angleOb/3270) - xR * Math.sin(iR/angleOb/3270);
+		camera.lookAt(scene.position);}
+	iR = iR + 1;
+	if(iR > 1000000) {iR = 4000;}
+	
+	
+	if (Doption == "OFF") {
+    renderer.clear(); // <-
+    //renderer.render(backgroundScene, backgroundCamera);
+    
+    
+	renderer.render( scene, camera );
+}
+if (Doption == "Anaglyph") {
+	anaglyphRenderer.render( scene, camera );
+}
+if (Doption == "Side-by-Side") {
+// Render the scene
+//stereoRenderer.render( scene, camera );
+//VRRenderer.render( scene, camera );
+OcRenderer.render( scene, camera );
+}
+}
+
+</script>
+
+	
+			
+</body>
+</html>
